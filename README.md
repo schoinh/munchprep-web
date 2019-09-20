@@ -7,14 +7,6 @@
 ## Description
 MunchPrep allows you to plan out a week's worth of meals and make a grocery shopping list in one convenient app. The grocery shopping list is categorized by grocery store sections to make your shopping more efficient.
 
-## Web Application Mock-Ups
-![mock-up of sign in page](./src/assets/images/mockup-signin.png)
-![mock-up of meal plan tab](./src/assets/images/mockup-menu.png)
-![mock-up of shopping list tab](./src/assets/images/mockup-shoppinglist.png)
-
-## React Component and Route Structure
-
-
 ## Setup/Installation Requirements
 
 1. Clone this repository:
