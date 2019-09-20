@@ -1,10 +1,13 @@
-# Tap Room
+# MunchPrep
 
-#### _A Web app for tracking kegs at a tap room - September 6, 2019_
+#### _A meal planning and grocery list app - September 20, 2019_
 
 #### _By **Na Hyung Choi**_
 
 ## Description
+![mock-up of sign in page](./src/assets/images/mockup-signin.png)
+![mock-up of meal plan tab](./src/assets/images/mockup-menu.png)
+![mock-up of shopping list tab](./src/assets/images/mockup-shoppinglist.png)
 
 ## React Component and Route Structure
 
