@@ -4,3 +4,4 @@
 ![mock-up of shopping list tab](./src/assets/images/mockup-shoppinglist.png)
 
 # React Component and Route Structure
+![React component tree diagram](./src/assets/images/Components.png)
