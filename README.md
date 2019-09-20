@@ -1,4 +1,4 @@
-# <img src="./src/assets/images/Logo.png" alt="MunchPrep Logo" width="250"/>
+<img src="./src/assets/images/Logo.png" alt="MunchPrep Logo" width="250"/>
 
 #### _A meal planning and grocery list app - September 20, 2019_
 
