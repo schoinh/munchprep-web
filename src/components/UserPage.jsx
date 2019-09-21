@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../assets/images/LogoSmall.png";
 
 function UserPage() {
   var navBarStyles = {
     backgroundColor: "#ffb5a6"
+  };
+
+  var logoStyles = {
+    height: "2.5em",
+    marginRight: "1em"
   };
 
   var linkStyles = {
@@ -18,7 +24,7 @@ function UserPage() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
         <div className="mr-auto">
-          <a className="navbar-brand" href="#">MunchPrep</a>
+          <a href="#"><img src={logo} style={logoStyles} /></a>
           <span className="navbar-text">
             Jane Doe
           </span>
