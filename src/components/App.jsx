@@ -6,7 +6,7 @@ import UserPage from "./UserPage";
 
 function App() {
   return (
-    <div className="container">
+    <div>
       <Switch>
         <Route exact path='/' component={Splash} />
         <Route path='/user-page' component={UserPage} />
