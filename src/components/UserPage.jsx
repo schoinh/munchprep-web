@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import logo from "../assets/images/LogoSmall.png";
+import UserTabs from "./UserTabs";
 
 function UserPage() {
   var navBarStyles = {
@@ -41,7 +41,7 @@ function UserPage() {
         </div>
       </nav>
       <div className="container">
-        tabs here
+        <UserTabs />
       </div>
     </div>
   );
