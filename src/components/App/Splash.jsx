@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/Logo.png";
-import github from "../assets/images/GitHub_Logo.png";
+import logo from "../../assets/images/Logo.png";
+import github from "../../assets/images/GitHub_Logo.png";
 
 function Splash() {
   var logoStyles = {

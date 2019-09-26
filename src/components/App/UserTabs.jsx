@@ -1,7 +1,8 @@
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import ShoppingList from "./ShoppingList";
+import Menu from "../Menu/Menu";
+import ShoppingList from "../ShoppingList/ShoppingList";
 
 function UserTabs() {
   var tabsStyle = {
@@ -9,9 +10,9 @@ function UserTabs() {
   };
 
   return (
-    <Tabs style={tabsStyle} defaultActiveKey="shoppingList" id="uncontrolled-tab-example">
+    <Tabs style={tabsStyle} defaultActiveKey="menu" id="uncontrolled-tab-example">
       <Tab eventKey="menu" title="Menu">
-        <p>The menu for the week will go here!</p>
+        <Menu />
       </Tab>
       <Tab eventKey="shoppingList" title="Shopping List">
         <ShoppingList />

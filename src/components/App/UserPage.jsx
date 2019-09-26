@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/images/LogoSmall.png";
+import logo from "../../assets/images/LogoSmall.png";
 import UserTabs from "./UserTabs";
 
 function UserPage() {
