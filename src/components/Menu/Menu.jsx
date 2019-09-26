@@ -114,14 +114,14 @@ function Menu() {
 
   return (
     <div>
-      {/* {Object.keys(menusByDay).map(dayId => {
+      {Object.keys(menusByDay).map(dayId => {
         let day = menusByDay[dayId];
         return <DayOfWeek
           name={day.name}
           meals={day.meals}
           key={dayId} />;
       })}
-      <img src={iconX} style={iconXStyles} /> */}
+      <img src={iconX} style={iconXStyles} />
     </div>
   );
 }
