@@ -9,9 +9,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "eslint src/index.jsx src/components/** --fix; webpack-dev-server; exit 0",
-    "lint": "eslint src/index.jsx src/components/**; exit 0",
-    "lint-fix": "eslint src/index.jsx src/components/** --fix; exit 0"
+    "start": "eslint src/index.jsx src/components/**/** --fix; webpack-dev-server; exit 0",
+    "lint": "eslint src/index.jsx src/components/**/**; exit 0",
+    "lint-fix": "eslint src/index.jsx src/components/**/** --fix; exit 0"
   },
   "author": "Na Hyung Choi",
   "license": "AGPL-3.0-only",
