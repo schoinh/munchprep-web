@@ -15,6 +15,7 @@ function NewItemForm() {
 
   var buttonStyle = {
     marginTop: "1em",
+    marginBottom: "2em",
     marginLeft: "auto",
     marginRight: "auto",
     display: "block"

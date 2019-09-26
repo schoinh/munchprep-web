@@ -1,7 +1,7 @@
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import NewItemForm from "./NewItemForm";
+import ShoppingList from "./ShoppingList";
 
 function UserTabs() {
   var tabsStyle = {
@@ -14,7 +14,7 @@ function UserTabs() {
         <p>The menu for the week will go here!</p>
       </Tab>
       <Tab eventKey="shoppingList" title="Shopping List">
-        <NewItemForm />
+        <ShoppingList />
       </Tab>
     </Tabs>
   );
