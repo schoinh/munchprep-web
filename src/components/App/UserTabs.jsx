@@ -1,8 +1,8 @@
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import Menu from "../Menu/Menu";
-import ShoppingList from "../ShoppingList/ShoppingList";
+import Menu from "../menu/Menu";
+import ShoppingList from "../shoppingList/ShoppingList";
 
 function UserTabs() {
   var tabsStyle = {
