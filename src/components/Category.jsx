@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Form from "react-bootstrap/Form";
 
 function Category(props) {
   return (
@@ -8,13 +9,15 @@ function Category(props) {
         {props.name}
       </div>
       <div className="card-body">
-        {Object.keys(props.items)
-          .map(itemId =>
-            <p key={itemId}>
-              {props.items[itemId].name}
-            </p>
-          )
-        }
+        <Form>
+          {Object.keys(props.items)
+            .map(itemId =>
+              <Form.Check
+                key={itemId}
+                label={props.items[itemId].name} />
+            )
+          }
+        </Form>
       </div>
     </div>
   );
