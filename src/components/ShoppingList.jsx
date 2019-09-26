@@ -2,6 +2,8 @@ import React from "react";
 import NewItemForm from "./NewItemForm";
 import CardGroup from "react-bootstrap/CardGroup";
 import Category from "./Category";
+import iconX from "./../assets/images/icon-x.png";
+import iconSweep from "./../assets/images/icon-sweep.png";
 
 function ShoppingList() {
   let itemsByCategory = {
@@ -38,6 +40,17 @@ function ShoppingList() {
     }
   };
 
+  var iconXStyles = {
+    width: "50px",
+    marginTop: "30px"
+  };
+
+  var iconSweepStyles = {
+    width: "50px",
+    marginTop: "30px",
+    float: "right"
+  };
+
   return (
     <div>
       <NewItemForm />
@@ -50,6 +63,8 @@ function ShoppingList() {
             key={categoryId} />;
         })}
       </CardGroup>
+      <img src={iconX} style={iconXStyles} />
+      <img src={iconSweep} style={iconSweepStyles} />
     </div>
   );
 }
