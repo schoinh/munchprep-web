@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import logo from "../assets/images/Logo.png";
 import { Link } from "react-router-dom";
 
-function Error404(props) {
+function Error404() {
   var logoStyles = {
     width: "400px",
     display: "block",
@@ -27,9 +26,5 @@ function Error404(props) {
     </div>
   );
 }
-
-Error404.propTypes = {
-  location: PropTypes.object
-};
 
 export default Error404;
