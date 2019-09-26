@@ -1,6 +1,7 @@
 import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import NewItemForm from "./NewItemForm";
 
 function UserTabs() {
   var tabsStyle = {
@@ -8,12 +9,12 @@ function UserTabs() {
   };
 
   return (
-    <Tabs style={tabsStyle} defaultActiveKey="menu" id="uncontrolled-tab-example">
+    <Tabs style={tabsStyle} defaultActiveKey="shoppingList" id="uncontrolled-tab-example">
       <Tab eventKey="menu" title="Menu">
-        <p>sample</p>
+        <p>The menu for the week will go here!</p>
       </Tab>
       <Tab eventKey="shoppingList" title="Shopping List">
-        <p>sample</p>
+        <NewItemForm />
       </Tab>
     </Tabs>
   );
