@@ -12,9 +12,11 @@ function Category(props) {
         <Form>
           {Object.keys(props.items)
             .map(itemId =>
-              <Form.Check
-                key={itemId}
-                label={props.items[itemId].name} />
+              <div key={itemId} className="d-flex justify-content-between">
+                <Form.Check
+                  label={props.items[itemId].name} />
+                <span>x</span>
+              </div>
             )
           }
         </Form>
