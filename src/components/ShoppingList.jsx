@@ -4,22 +4,37 @@ import CardGroup from "react-bootstrap/CardGroup";
 import Category from "./Category";
 
 function ShoppingList() {
-  let itemList = {
+  let itemsByCategory = {
     1: {
-      name: "broccoli",
-      category: "Produce"
+      name: "Produce",
+      items: {
+        1: {
+          name: "broccoli"
+        },
+        2: {
+          name: "strawberries"
+        },
+      }
     },
     2: {
-      name: "strawberries",
-      category: "Produce"
+      name: "Proteins",
+      items: {
+        1: {
+          name: "eggs"
+        }
+      }
     },
     3: {
-      name: "eggs",
-      category: "Proteins"
+      name: "Other Foods",
+      items: {}
     },
     4: {
-      name: "detergent",
-      category: "Non-Foods"
+      name: "Non-Foods",
+      items: {
+        1: {
+          name: "detergent"
+        }
+      }
     }
   };
 
@@ -27,10 +42,13 @@ function ShoppingList() {
     <div>
       <NewItemForm />
       <CardGroup>
-        <Category name="Produce" items={itemList} />
-        <Category name="Proteins" items={itemList} />
-        <Category name="Other Foods" items={itemList} />
-        <Category name="Non-Foods" items={itemList} />
+        {Object.keys(itemsByCategory).map(categoryId => {
+          let category = itemsByCategory[categoryId];
+          return <Category
+            name={category.name}
+            items={category.items}
+            key={categoryId} />;
+        })}
       </CardGroup>
     </div>
   );
