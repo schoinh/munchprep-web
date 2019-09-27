@@ -29,3 +29,52 @@
 
 # React Component and Route Structure
 ![React component tree diagram](./src/assets/images/Components.png)
+
+# React States
+`Menu` component will hold the `menusByDay` and `snacks` state slices.
+```
+{
+  menusByDay: {
+    1: {
+      name: "Sunday",
+      meals: {
+        "breakfast": {
+          name: "Scrambled eggs"
+        },
+        "lunch": {
+          name: "Cobb salad"
+        },
+        "dinner": {
+          name: "Grilled salmon"
+        }
+      }
+    },
+    2: { ... }
+    ...
+  },
+  snacks: "carrots, cherries",
+
+}
+```
+
+`ShoppingList` component will hold the `itemsByCategory` state.
+```
+{
+  itemsByCategory: {
+    1: {
+      name: "Produce",
+      items: {
+        1: {
+          name: "broccoli",
+          checked: false
+        },
+        2: {
+          name: "strawberries",
+          checked: true
+        }
+      }
+    },
+    ...
+  }
+}
+```
