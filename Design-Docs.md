@@ -1,30 +1,25 @@
-# Project Proposal
-
-## Project Name: MunchPrep
+# Project Proposal - MunchPrep
 
 ### Project’s Purpose or Goal
-* MVP: Allow user to make a grocery list, categorized by store section
-* Beyond MVP: Also allow user to create a meal plan for the week
+* MVP: Allow user to make a grocery list, categorized by store section, and allow user to create a meal plan for the week (Web app)
+* Beyond MVP: Create a React Native version of the app; allow user to customize settings
 
 ### MVP Features
-* Deployed relational database + Web API
+* CRUD functionality for meal plan and shopping list
+* Deployed relational database and user authentication via Firebase
 * Mobile-friendly UI
 
 ### Technologies Used for MVP
-* C# Web API
-* Azure or AWS
+* Firebase
 * React
-* MySQL, or another SQL management system more compatible with Azure
-* EF Core or Dapper
+* Redux
 
 ### Extra Features (Beyond MVP)
-* User authentication
 * Native mobile app
-* Weekly meal planning feature
 * Custom categories
+* Custom starting day of week for meal plan
 
 ### Technologies Used for Extra Feaures
-* User authentication tool (e.g., Auth0)
 * React Native
 
 # Web App Mock-Ups
