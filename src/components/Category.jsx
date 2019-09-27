@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
+import GroceryItem from "./GroceryItem";
 
 function Category(props) {
   return (
@@ -12,11 +13,10 @@ function Category(props) {
         <Form>
           {Object.keys(props.items)
             .map(itemId =>
-              <div key={itemId} className="d-flex justify-content-between">
-                <Form.Check
-                  label={props.items[itemId].name} />
-                <span>x</span>
-              </div>
+              <GroceryItem
+                key={itemId}
+                itemId={itemId}
+                name={props.items[itemId].name} />
             )
           }
         </Form>
