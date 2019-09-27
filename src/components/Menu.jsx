@@ -2,6 +2,7 @@ import React from "react";
 // import CardGroup from "react-bootstrap/CardGroup";
 import DayOfWeek from "./DayOfWeek";
 import iconX from "../assets/images/icon-x.png";
+import Snacks from "./Snacks";
 
 function Menu() {
   let menusByDay = {
@@ -147,6 +148,7 @@ function Menu() {
             meals={day.meals}
             key={dayId} />;
         })}
+        <Snacks snacks={snacks} />
       </div>
       <img src={iconX} style={iconXStyles} />
     </div>
