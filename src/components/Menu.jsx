@@ -109,48 +109,46 @@ function Menu() {
   let snacks = "Carrots, pistachios";
 
   var menuStyles = {
-    marginTop: "2em",
-    marginLeft: "auto",
-    marginRight: "auto",
-    display: "block"
+    marginTop: "2em"
   };
 
-  var column2Styles = {
+  var columnStyles = {
     float: "left",
-    marginLeft: "2em",
-    marginRight: "auto"
+    marginLeft: "2em"
   };
 
   var iconXStyles = {
     width: "50px",
     marginTop: "30px",
-    marginLeft: "auto",
-    marginRight: "auto",
-    display: "block"
+    float: "left"
   };
 
   return (
-    <div style={menuStyles}>
-      <div style={column2Styles}>
-        {Object.keys(menusByDay).filter(dayId => dayId < 5).map(dayId => {
-          let day = menusByDay[dayId];
-          return <DayOfWeek
-            name={day.name}
-            meals={day.meals}
-            key={dayId} />;
-        })}
+    <div>
+      <div className="row justify-content-center" style={menuStyles}>
+        <div style={columnStyles}>
+          {Object.keys(menusByDay).filter(dayId => dayId < 5).map(dayId => {
+            let day = menusByDay[dayId];
+            return <DayOfWeek
+              name={day.name}
+              meals={day.meals}
+              key={dayId} />;
+          })}
+        </div>
+        <div style={columnStyles}>
+          {Object.keys(menusByDay).filter(dayId => dayId > 4).map(dayId => {
+            let day = menusByDay[dayId];
+            return <DayOfWeek
+              name={day.name}
+              meals={day.meals}
+              key={dayId} />;
+          })}
+          <Snacks snacks={snacks} />
+        </div>
       </div>
-      <div style={column2Styles}>
-        {Object.keys(menusByDay).filter(dayId => dayId > 4).map(dayId => {
-          let day = menusByDay[dayId];
-          return <DayOfWeek
-            name={day.name}
-            meals={day.meals}
-            key={dayId} />;
-        })}
-        <Snacks snacks={snacks} />
+      <div className="row">
+        <img src={iconX} style={iconXStyles} />
       </div>
-      <img src={iconX} style={iconXStyles} />
     </div>
   );
 }
