@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
 
 function DayOfWeek(props) {
   var dayOfWeekStyles = {
-    float: "left"
+    width: "20em",
+    marginBottom: "1em",
+    marginLeft: "auto",
+    marginRight: "auto"
   };
 
   return (

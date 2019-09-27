@@ -107,20 +107,47 @@ function Menu() {
 
   let snacks = "Carrots, pistachios";
 
+  var menuStyles = {
+    marginTop: "2em",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "block"
+  };
+
+  var column2Styles = {
+    float: "left",
+    marginLeft: "2em",
+    marginRight: "auto"
+  };
+
   var iconXStyles = {
     width: "50px",
-    marginTop: "30px"
+    marginTop: "30px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    display: "block"
   };
 
   return (
-    <div>
-      {Object.keys(menusByDay).map(dayId => {
-        let day = menusByDay[dayId];
-        return <DayOfWeek
-          name={day.name}
-          meals={day.meals}
-          key={dayId} />;
-      })}
+    <div style={menuStyles}>
+      <div style={column2Styles}>
+        {Object.keys(menusByDay).filter(dayId => dayId < 5).map(dayId => {
+          let day = menusByDay[dayId];
+          return <DayOfWeek
+            name={day.name}
+            meals={day.meals}
+            key={dayId} />;
+        })}
+      </div>
+      <div style={column2Styles}>
+        {Object.keys(menusByDay).filter(dayId => dayId > 4).map(dayId => {
+          let day = menusByDay[dayId];
+          return <DayOfWeek
+            name={day.name}
+            meals={day.meals}
+            key={dayId} />;
+        })}
+      </div>
       <img src={iconX} style={iconXStyles} />
     </div>
   );
