@@ -1,7 +1,7 @@
 import React from "react";
 // import CardGroup from "react-bootstrap/CardGroup";
 import DayOfWeek from "./DayOfWeek";
-import iconX from "../../assets/images/icon-x.png";
+import iconX from "../assets/images/icon-x.png";
 
 function Menu() {
   let menusByDay = {

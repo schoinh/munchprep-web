@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Error404 from "./app/Error404";
-import Splash from "./app/Splash";
-import UserPage from "./app/UserPage";
+import Error404 from "./Error404";
+import Splash from "./Splash";
+import UserPage from "./UserPage";
 
 function App() {
   return (

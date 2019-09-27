@@ -4,12 +4,12 @@
   "description": "Meal Planning and Grocery List App",
   "repository": {
     "type": "git",
-    "url": "https://github.com/schoinh/MunchPrep.git"
+    "url": "https://github.com/schoinh/munchprep-web.git"
   },
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "start": "eslint src/index.jsx src/components/**/** --fix; webpack-dev-server; exit 0",
+    "start": "eslint src/index.jsx src/components/**/**; webpack-dev-server; exit 0",
     "lint": "eslint src/index.jsx src/components/**/**; exit 0",
     "lint-fix": "eslint src/index.jsx src/components/**/** --fix; exit 0"
   },
