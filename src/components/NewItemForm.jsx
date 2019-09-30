@@ -26,7 +26,7 @@ function NewItemForm(props) {
 
   function handleNewProduceItemFormSubmit() {
     const { dispatch } = props;
-    dispatch(addItem(_name.value, "Produce")); // fix this;
+    dispatch(addItem(_name.value)); // fix this;
     _name.value = "";
   }
 
