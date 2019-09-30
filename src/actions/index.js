@@ -1,18 +1,24 @@
 import constants from "./../constants";
 const { firebaseConfig, c } = constants;
-import Firebase from "firebase";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
-firebase.initializeApp(firebaseConfig);
-const tickets = firebase.database().ref("tickets");
+firebase.initializeApp({
+  apiKey: "AIzaSyBSoHxj5zny3Z-H6LgLjkz4cgezKKK_vUQ",
+  authDomain: "munchprep.firebaseapp.com",
+  projectId: "munchprep"
+});
+// firebase.analytics();
 
-// export function addTicket(_names, _location, _issue) {
-//   return () => tickets.push({
-//     names: _names,
-//     location: _location,
-//     issue: _issue,
-//     timeOpen: new Date().getTime()
-//   });
-// }
+const db = firebase.firestore();
+
+export function addItem(_name, _category) {
+  return () => db.collection("categories").add({
+    category: _category,
+    name: _name
+  });
+}
 
 // export function watchFirebaseTicketsRef() {
 //   return function (dispatch) {

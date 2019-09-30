@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 function GroceryItem(props) {
   return (
     <div className="d-flex justify-content-between">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id={props.itemId} />
-        <label class="form-check-label" for={props.itemId}>
+      <div className="form-check">
+        <input className="form-check-input" type="checkbox" id={props.itemId} />
+        <label className="form-check-label" htmlFor={props.itemId}>
           {props.name}
         </label>
       </div>

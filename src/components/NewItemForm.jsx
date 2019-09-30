@@ -2,9 +2,10 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-// import NewItemForm from "./NewItemForm";
+import { connect } from "react-redux";
+import { addItem } from "./../actions";
 
-function NewItemForm() {
+function NewItemForm(props) {
   var inputStyle = {
     width: "20em",
     marginTop: "2em",
@@ -21,19 +22,31 @@ function NewItemForm() {
     display: "block"
   };
 
+  let _name = null;
+
+  function handleNewProduceItemFormSubmit() {
+    const { dispatch } = props;
+    dispatch(addItem(_name.value, "Produce")); // fix this;
+    _name.value = "";
+  }
+
   return (
     <div>
-      <Form.Control style={inputStyle} type="text" placeholder="New Item" />
+      <Form.Control
+        style={inputStyle}
+        type="text"
+        placeholder="New Item"
+        ref={(input) => { _name = input; }} />
       <div className="d-flex flex-column">
         <ButtonGroup style={buttonStyle}>
-          <Button variant="secondary">Produce</Button>
-          <Button variant="secondary">Proteins</Button>
-          <Button variant="secondary">Other Foods</Button>
-          <Button variant="secondary">Non-Foods</Button>
+          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Produce</Button>
+          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Proteins</Button>
+          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Other Foods</Button>
+          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Non-Foods</Button>
         </ButtonGroup>
       </div>
     </div>
   );
 }
 
-export default NewItemForm;
+export default connect()(NewItemForm);

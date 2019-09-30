@@ -10,7 +10,7 @@ function UserTabs() {
   };
 
   return (
-    <Tabs style={tabsStyle} defaultActiveKey="menu" id="uncontrolled-tab-example">
+    <Tabs style={tabsStyle} defaultActiveKey="shoppingList" id="uncontrolled-tab-example">
       <Tab eventKey="menu" title="Menu">
         <Menu />
       </Tab>
