@@ -1,14 +1,14 @@
 import React from "react";
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Switch, Route, withRouter } from "react-router-dom";
 import Error404 from "./Error404";
 import Splash from "./Splash";
 import UserPage from "./UserPage";
-import * as actions from './../actions';
+import * as actions from "./../actions";
 
 class App extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { dispatch } = this.props;
     const { watchFirebaseItems } = actions;
     dispatch(watchFirebaseItems());
