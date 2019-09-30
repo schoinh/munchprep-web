@@ -23,10 +23,25 @@ function NewItemForm(props) {
   };
 
   let _name = null;
+  const { dispatch } = props;
 
-  function handleNewProduceItemFormSubmit() {
-    const { dispatch } = props;
-    dispatch(addItem(_name.value, "Produce")); // fix this;
+  function handleNewProduceFormSubmit() {
+    dispatch(addItem(_name.value, "Produce"));
+    _name.value = "";
+  }
+
+  function handleNewProteinsFormSubmit() {
+    dispatch(addItem(_name.value, "Proteins"));
+    _name.value = "";
+  }
+
+  function handleNewOtherFoodsFormSubmit() {
+    dispatch(addItem(_name.value, "Other Foods"));
+    _name.value = "";
+  }
+
+  function handleNewNonFoodsFormSubmit() {
+    dispatch(addItem(_name.value, "Non-Foods"));
     _name.value = "";
   }
 
@@ -39,10 +54,10 @@ function NewItemForm(props) {
         ref={(input) => { _name = input; }} />
       <div className="d-flex flex-column">
         <ButtonGroup style={buttonStyle}>
-          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Produce</Button>
-          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Proteins</Button>
-          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Other Foods</Button>
-          <Button variant="secondary" onClick={handleNewProduceItemFormSubmit}>Non-Foods</Button>
+          <Button variant="secondary" onClick={handleNewProduceFormSubmit}>Produce</Button>
+          <Button variant="secondary" onClick={handleNewProteinsFormSubmit}>Proteins</Button>
+          <Button variant="secondary" onClick={handleNewOtherFoodsFormSubmit}>Other Foods</Button>
+          <Button variant="secondary" onClick={handleNewNonFoodsFormSubmit}>Non-Foods</Button>
         </ButtonGroup>
       </div>
     </div>
