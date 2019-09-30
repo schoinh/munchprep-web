@@ -13,9 +13,11 @@ firebase.initializeApp({
 
 const db = firebase.firestore();
 
-export function addItem(_name) {
-  return () => db.collection("categories").add({
-    name: _name
+export function addItem(_name, _category) {
+  return () => db.collection("categories").doc(_category).collection("items").add({
+    name: _name,
+    checked: false,
+    timestamp: new Date().getTime()
   });
 }
 
