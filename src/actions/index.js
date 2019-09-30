@@ -17,21 +17,30 @@ export function addItem(_name, _category) {
   });
 }
 
-// export function watchFirebaseTicketsRef() {
-//   return function (dispatch) {
-//     tickets.on('child_added', data => {
-//       const newTicket = Object.assign({}, data.val(), {
-//         id: data.getKey(),
-//         formattedWaitTime: new Moment(data.val().timeOpen).from(new Moment())
-//       });
-//       dispatch(receiveTicket(newTicket));
-//     });
-//   };
-// }
+export function watchFirebaseItems() {
+  return function (dispatch) {
+    db.collection("categories")
+      .onSnapshot(querySnapshot => {
+        var categories = [];
+        querySnapshot.forEach(doc => {
+          categories.push(doc.data().name);
+        });
+        console.log("categories: ", categories.join(", "));
+      });
 
-// function receiveTicket(ticketFromFirebase) {
-//   return {
-//     type: c.RECEIVE_TICKET,
-//     ticket: ticketFromFirebase
-//   };
-// }
+    // .on('child_added', data => {
+    //   const newTicket = Object.assign({}, data.val(), {
+    //     id: data.getKey(),
+    //     formattedWaitTime: new Moment(data.val().timeOpen).from(new Moment())
+    //   });
+    //   dispatch(receiveTicket(newTicket));
+    // });
+  };
+}
+
+function getItem(itemFromFirebase) {
+  return {
+    type: c.GET_ITEM,
+    item: itemFromFirebase
+  };
+}

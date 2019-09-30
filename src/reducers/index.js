@@ -1,10 +1,10 @@
 // import selectedTicketReducer from './selected-ticket-reducer';
-// import ticketListReducer from './ticket-list-reducer';
+import shoppingListReducer from "./shopping-list-reducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   // selectedTicket: selectedTicketReducer,
-  // masterTicketList: ticketListReducer
+  masterShoppingList: shoppingListReducer
 });
 
 export default rootReducer;

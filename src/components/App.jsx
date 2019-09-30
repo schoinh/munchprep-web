@@ -1,19 +1,40 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Switch, Route, withRouter } from "react-router-dom";
 import Error404 from "./Error404";
 import Splash from "./Splash";
 import UserPage from "./UserPage";
+import * as actions from './../actions';
 
-function App() {
-  return (
-    <div>
-      <Switch>
-        <Route exact path='/' component={Splash} />
-        <Route path='/user-page' component={UserPage} />
-        <Route component={Error404} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component {
+  componentWillMount() {
+    const { dispatch } = this.props;
+    const { watchFirebaseItems } = actions;
+    dispatch(watchFirebaseItems());
+  }
+
+  render() {
+    return (
+      <div>
+        <Switch>
+          <Route exact path='/' component={Splash} />
+          <Route path='/user-page' component={UserPage} />
+          <Route component={Error404} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App;
+App.propTypes = {
+  masterShoppingList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterShoppingList: state.masterShoppingList
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(App));
