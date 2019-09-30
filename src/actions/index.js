@@ -4,11 +4,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-firebase.initializeApp({
-  apiKey: "AIzaSyBSoHxj5zny3Z-H6LgLjkz4cgezKKK_vUQ",
-  authDomain: "munchprep.firebaseapp.com",
-  projectId: "munchprep"
-});
+firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
 const db = firebase.firestore();
