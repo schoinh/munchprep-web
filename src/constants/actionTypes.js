@@ -1,3 +1,3 @@
 // export const ADD_ITEM = "ADD_ITEM";
-// export const UPDATE_TIME = "UPDATE_TIME";
+export const TOGGLE_CHECKED = "TOGGLE_CHECKED";
 export const RECEIVE_CATEGORY = "RECEIVE_CATEGORY";

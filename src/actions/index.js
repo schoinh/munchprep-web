@@ -48,5 +48,9 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
 }
 
 export function toggleChecked(categoryId, itemId) {
-
+  return {
+    type: c.TOGGLE_CHECKED,
+    categoryId: categoryId,
+    itemId: itemId
+  };
 }

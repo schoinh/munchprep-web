@@ -1,9 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { toggleChecked } from "./../actions";
 
 function GroceryItem(props) {
   function handleItemClick() {
+    const { dispatch } = props;
     dispatch(toggleChecked(props.categoryId, props.itemId));
   }
 
@@ -27,4 +29,4 @@ GroceryItem.propTypes = {
   checked: PropTypes.bool
 };
 
-export default GroceryItem;
+export default connect()(GroceryItem);
