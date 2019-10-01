@@ -16,7 +16,9 @@ function Category(props) {
               <GroceryItem
                 key={itemId}
                 itemId={itemId}
-                name={props.items[itemId].name} />
+                categoryId={props.id}
+                name={props.items[itemId].name}
+                checked={props.items[itemId].checked} />
             )
           }
         </Form>
@@ -27,7 +29,8 @@ function Category(props) {
 
 Category.propTypes = {
   name: PropTypes.string,
-  items: PropTypes.object
+  items: PropTypes.object,
+  id: PropTypes.string
 };
 
 export default Category;

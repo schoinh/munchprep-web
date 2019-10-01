@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../assets/images/LogoSmall.png";
 import UserTabs from "./UserTabs";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function UserPage(props) {
   var navBarStyles = {

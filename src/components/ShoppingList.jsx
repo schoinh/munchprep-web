@@ -2,7 +2,7 @@ import React from "react";
 import NewItemForm from "./NewItemForm";
 import CardGroup from "react-bootstrap/CardGroup";
 import Category from "./Category";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import iconX from "../assets/images/icon-x.png";
 import iconSweep from "../assets/images/icon-sweep.png";
 
@@ -27,6 +27,7 @@ function ShoppingList(props) {
           return <Category
             name={category.name}
             items={category.items}
+            id={categoryId}
             key={categoryId} />;
         })}
       </CardGroup>

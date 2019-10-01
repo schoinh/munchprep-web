@@ -46,3 +46,7 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
     items: itemsFromFirebase
   };
 }
+
+export function toggleChecked(categoryId, itemId) {
+
+}
