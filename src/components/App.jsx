@@ -19,7 +19,7 @@ class App extends React.Component {
       <div>
         <Switch>
           <Route exact path='/' component={Splash} />
-          <Route path='/user-page' component={UserPage} />
+          <Route path='/user-page' render={() => <UserPage masterShoppingList={this.props.masterShoppingList} />} />
           <Route component={Error404} />
         </Switch>
       </div>

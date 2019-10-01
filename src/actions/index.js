@@ -22,13 +22,11 @@ export function watchFirebaseItems() {
     db.collection("categories").orderBy("timestamp")
       .onSnapshot(categoryCollectionSnapshot => {
         categoryCollectionSnapshot.forEach(categorySnapshot => {
-          console.log("categorySnapshot: ", categorySnapshot);
           let categoryId = categorySnapshot.id;
           let category = categorySnapshot.data();
           db.collection("categories").doc(categoryId).collection("items").orderBy("timestamp", "desc").onSnapshot(
             itemsCollectionSnapshot => {
               let items = {};
-              console.log("items: ", items);
               itemsCollectionSnapshot.forEach(itemSnapshot => {
                 items[itemSnapshot.id] = itemSnapshot.data();
               });

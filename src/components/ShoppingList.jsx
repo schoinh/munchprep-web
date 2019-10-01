@@ -2,44 +2,11 @@ import React from "react";
 import NewItemForm from "./NewItemForm";
 import CardGroup from "react-bootstrap/CardGroup";
 import Category from "./Category";
+import PropTypes from 'prop-types';
 import iconX from "../assets/images/icon-x.png";
 import iconSweep from "../assets/images/icon-sweep.png";
 
-function ShoppingList() {
-  let itemsByCategory = {
-    1: {
-      name: "Produce",
-      items: {
-        1: {
-          name: "broccoli"
-        },
-        2: {
-          name: "strawberries"
-        },
-      }
-    },
-    2: {
-      name: "Proteins",
-      items: {
-        1: {
-          name: "eggs"
-        }
-      }
-    },
-    3: {
-      name: "Other Foods",
-      items: {}
-    },
-    4: {
-      name: "Non-Foods",
-      items: {
-        1: {
-          name: "detergent"
-        }
-      }
-    }
-  };
-
+function ShoppingList(props) {
   var iconXStyles = {
     width: "50px",
     marginTop: "30px"
@@ -55,8 +22,8 @@ function ShoppingList() {
     <div>
       <NewItemForm />
       <CardGroup>
-        {Object.keys(itemsByCategory).map(categoryId => {
-          let category = itemsByCategory[categoryId];
+        {Object.keys(props.masterTicketList).map(categoryId => {
+          let category = props.masterTicketList[categoryId];
           return <Category
             name={category.name}
             items={category.items}
@@ -68,5 +35,9 @@ function ShoppingList() {
     </div>
   );
 }
+
+ShoppingList.propTypes = {
+  masterTicketList: PropTypes.object
+};
 
 export default ShoppingList;

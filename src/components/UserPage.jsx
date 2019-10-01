@@ -1,8 +1,9 @@
 import React from "react";
 import logo from "../assets/images/LogoSmall.png";
 import UserTabs from "./UserTabs";
+import PropTypes from 'prop-types';
 
-function UserPage() {
+function UserPage(props) {
   var navBarStyles = {
     backgroundColor: "#ffb5a6"
   };
@@ -41,10 +42,14 @@ function UserPage() {
         </div>
       </nav>
       <div className="container">
-        <UserTabs />
+        <UserTabs masterTicketList={props.masterShoppingList} />
       </div>
     </div>
   );
 }
+
+UserPage.propTypes = {
+  masterShoppingList: PropTypes.object
+};
 
 export default UserPage;
