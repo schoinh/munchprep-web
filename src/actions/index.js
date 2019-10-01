@@ -35,7 +35,7 @@ export function watchFirebaseItems() {
 
     getCategoryNames.then(result => {
       result.forEach(categoryName => {
-        db.collection("categories").doc(categoryName).collection("items")
+        db.collection("categories").doc(categoryName).collection("items").orderBy("timestamp", "desc")
           .onSnapshot(querySnapshot => {
             // console.log("query snapshot: ", querySnapshot);
             let items = [];
