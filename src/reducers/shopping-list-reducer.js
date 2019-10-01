@@ -14,12 +14,12 @@ export default (state = {}, action) => {
       return newState;
 
     case c.TOGGLE_CHECKED:
+      const { categoryId, itemId } = action;
       newState = Object.assign({}, state);
-      let checkedStatus = newState[action.categoryId].items[action.itemId].checked;
-      if (checkedStatus == false) {
-        newState[action.categoryId].items[action.itemId].checked = true;
+      if (newState[categoryId].items[itemId].checked == false) {
+        newState[categoryId].items[itemId].checked = true;
       } else {
-        newState[action.categoryId].items[action.itemId].checked = false;
+        newState[categoryId].items[itemId].checked = false;
       }
       return newState;
 
