@@ -39,10 +39,10 @@ function NewItemForm(props) {
         ref={(input) => { _name = input; }} />
       <div className="d-flex flex-column">
         <ButtonGroup style={buttonStyle}>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="Produce">Produce</Button>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="Proteins">Proteins</Button>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="Other Foods">Other Foods</Button>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="Non-Foods">Non-Foods</Button>
+          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="0LPUR8dEnHACoX22Bjjw">Produce</Button>
+          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="TX1p7g1EpNmkDCz9S6rz">Proteins</Button>
+          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="YjATY4IT4FXZF0HGJspb">Other Foods</Button>
+          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="bLnOIoiWyUukXD8DsytE">Non-Foods</Button>
         </ButtonGroup>
       </div>
     </div>

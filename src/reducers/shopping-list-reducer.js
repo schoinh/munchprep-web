@@ -7,9 +7,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case c.RECEIVE_CATEGORY:
       newState = Object.assign({}, state);
-      console.log("action.category: ", action.category);
-      console.log("action.category.timestamp: ", action.category.timestamp);
-      newState[action.category.timestamp] = {
+      newState[action.categoryId] = {
         name: action.category.name,
         items: action.items
       };

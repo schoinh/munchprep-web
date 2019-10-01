@@ -9,8 +9,8 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-export function addItem(_name, _category) {
-  return () => db.collection("categories").doc(_category).collection("items").add({
+export function addItem(_name, _categoryId) {
+  return () => db.collection("categories").doc(_categoryId).collection("items").add({
     name: _name,
     checked: false,
     timestamp: new Date().getTime()
@@ -20,30 +20,32 @@ export function addItem(_name, _category) {
 export function watchFirebaseItems() {
   return function (dispatch) {
     db.collection("categories").orderBy("timestamp")
-      .onSnapshot(querySnapshot => {
-        querySnapshot.forEach(docSnapshot => {
-          let category = docSnapshot.data();
-          db.collection("categories").doc(category.name).collection("items").orderBy("timestamp", "desc").get()
+      .onSnapshot(categoryCollectionSnapshot => {
+        categoryCollectionSnapshot.forEach(categorySnapshot => {
+          console.log("categorySnapshot: ", categorySnapshot);
+          let categoryId = categorySnapshot.id;
+          let category = categorySnapshot.data();
+          db.collection("categories").doc(categoryId).collection("items").orderBy("timestamp", "desc").get()
             .then(
-              querySnapshot => {
-                // console.log("query snapshot: ", querySnapshot);
+              itemsCollectionSnapshot => {
                 let items = {};
-                querySnapshot.forEach(docSnapshot => {
-                  items[docSnapshot.id] = docSnapshot.data();
-                });
                 console.log("items: ", items);
-                dispatch(receiveCategory(category, items));
+                itemsCollectionSnapshot.forEach(itemSnapshot => {
+                  items[itemSnapshot.id] = itemSnapshot.data();
+                });
+                dispatch(receiveCategory(categoryId, category, items));
               }
-            )
+            );
         });
-      })
-  }
+      });
+  };
 }
 
-function receiveCategory(categoryFromFirebase, itemsFromFirebase) {
+function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFromFirebase) {
   return {
     type: c.RECEIVE_CATEGORY,
+    categoryId: categoryIdFromFirebase,
     category: categoryFromFirebase,
     items: itemsFromFirebase
-  }
+  };
 }
