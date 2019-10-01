@@ -38,11 +38,9 @@ export function watchFirebaseItems() {
         db.collection("categories").doc(categoryName).collection("items").orderBy("timestamp", "desc")
           .onSnapshot(querySnapshot => {
             // console.log("query snapshot: ", querySnapshot);
-            let items = [];
+            let items = {};
             querySnapshot.forEach(docSnapshot => {
-              // console.log("docSnapshot: ", docSnapshot);
-              // console.log("docSnapshot.data(): ", docSnapshot.data());
-              items.push(docSnapshot.data());
+              items[docSnapshot.id] = docSnapshot.data();
             });
             console.log("items: ", items);
           });
@@ -59,9 +57,9 @@ export function watchFirebaseItems() {
   }
 }
 
-function getItem(itemFromFirebase) {
+function receiveItems(itemsFromFirebase) {
   return {
-    type: c.GET_ITEM,
-    item: itemFromFirebase
+    type: c.RECEIVE_ITEMS,
+    items: itemsFromFirebase
   };
 }
