@@ -19,14 +19,29 @@ export function addItem(_name, _category) {
 
 export function watchFirebaseItems() {
   return function (dispatch) {
-    db.collection("categories")
+    db.collection("categories").doc("Produce").collection("items")
       .onSnapshot(querySnapshot => {
+        console.log("query snapshot: ", querySnapshot);
         var categories = [];
-        querySnapshot.forEach(doc => {
-          categories.push(doc.data().name);
+        querySnapshot.forEach(docSnapshot => {
+          console.log("docSnapshot: ", docSnapshot);
+          console.log("docSnapshot.data(): ", docSnapshot.data());
+          categories.push(docSnapshot.data().name);
         });
-        console.log("categories: ", categories.join(", "));
+        console.log("items: ", categories.join(", "));
       });
+
+    // db.collection("categories")
+    //   .onSnapshot(querySnapshot => {
+    //     console.log("query snapshot: ", querySnapshot);
+    //     var categories = [];
+    //     querySnapshot.forEach(docSnapshot => {
+    //       console.log("docSnapshot: ", docSnapshot);
+    //       console.log("docSnapshot.data(): ", docSnapshot.data());
+    //       categories.push(docSnapshot.data().name);
+    //     });
+    //     console.log("categories: ", categories.join(", "));
+    //   });
 
     // .on('child_added', data => {
     //   const newTicket = Object.assign({}, data.val(), {
