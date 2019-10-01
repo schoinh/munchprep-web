@@ -19,29 +19,30 @@ export function addItem(_name, _category) {
 
 export function watchFirebaseItems() {
   return function (dispatch) {
-    db.collection("categories").doc("Produce").collection("items")
+    const categories = [];
+
+    db.collection("categories").orderBy("timestamp")
       .onSnapshot(querySnapshot => {
-        console.log("query snapshot: ", querySnapshot);
-        var categories = [];
         querySnapshot.forEach(docSnapshot => {
-          console.log("docSnapshot: ", docSnapshot);
-          console.log("docSnapshot.data(): ", docSnapshot.data());
           categories.push(docSnapshot.data().name);
         });
-        console.log("items: ", categories.join(", "));
-      });
+        console.log("categories: ", categories);
+      })
 
-    // db.collection("categories")
-    //   .onSnapshot(querySnapshot => {
-    //     console.log("query snapshot: ", querySnapshot);
-    //     var categories = [];
-    //     querySnapshot.forEach(docSnapshot => {
-    //       console.log("docSnapshot: ", docSnapshot);
-    //       console.log("docSnapshot.data(): ", docSnapshot.data());
-    //       categories.push(docSnapshot.data().name);
-    //     });
-    //     console.log("categories: ", categories.join(", "));
-    //   });
+    categories.forEach(categoryName => {
+      console.log(categoryName);
+      // db.collection("categories").doc(categoryName).collection("items")
+      //   .onSnapshot(querySnapshot => {
+      //     console.log("query snapshot: ", querySnapshot);
+      //     let items = [];
+      //     querySnapshot.forEach(docSnapshot => {
+      //       console.log("docSnapshot: ", docSnapshot);
+      //       console.log("docSnapshot.data(): ", docSnapshot.data());
+      //       items.push(docSnapshot.data().name);
+      //     });
+      //     console.log("items: ", items.join(", "));
+      //   });
+    })
 
     // .on('child_added', data => {
     //   const newTicket = Object.assign({}, data.val(), {
