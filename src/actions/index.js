@@ -19,30 +19,35 @@ export function addItem(_name, _category) {
 
 export function watchFirebaseItems() {
   return function (dispatch) {
-    const categories = [];
 
-    db.collection("categories").orderBy("timestamp")
-      .onSnapshot(querySnapshot => {
-        querySnapshot.forEach(docSnapshot => {
-          categories.push(docSnapshot.data().name);
-        });
-        console.log("categories: ", categories);
+    // This promise is not necesary for static categories but will be needed for custom categories
+    const getCategoryNames = new Promise((resolve, reject) => {
+      const categoryNames = [];
+      db.collection("categories").orderBy("timestamp")
+        .onSnapshot(querySnapshot => {
+          querySnapshot.forEach(docSnapshot => {
+            categoryNames.push(docSnapshot.data().name);
+          });
+          resolve(categoryNames);
+          console.log("categoryNames: ", categoryNames);
+        })
+    });
+
+    getCategoryNames.then(result => {
+      result.forEach(categoryName => {
+        db.collection("categories").doc(categoryName).collection("items")
+          .onSnapshot(querySnapshot => {
+            // console.log("query snapshot: ", querySnapshot);
+            let items = [];
+            querySnapshot.forEach(docSnapshot => {
+              // console.log("docSnapshot: ", docSnapshot);
+              // console.log("docSnapshot.data(): ", docSnapshot.data());
+              items.push(docSnapshot.data());
+            });
+            console.log("items: ", items);
+          });
       })
-
-    categories.forEach(categoryName => {
-      console.log(categoryName);
-      // db.collection("categories").doc(categoryName).collection("items")
-      //   .onSnapshot(querySnapshot => {
-      //     console.log("query snapshot: ", querySnapshot);
-      //     let items = [];
-      //     querySnapshot.forEach(docSnapshot => {
-      //       console.log("docSnapshot: ", docSnapshot);
-      //       console.log("docSnapshot.data(): ", docSnapshot.data());
-      //       items.push(docSnapshot.data().name);
-      //     });
-      //     console.log("items: ", items.join(", "));
-      //   });
-    })
+    });
 
     // .on('child_added', data => {
     //   const newTicket = Object.assign({}, data.val(), {
@@ -51,7 +56,7 @@ export function watchFirebaseItems() {
     //   });
     //   dispatch(receiveTicket(newTicket));
     // });
-  };
+  }
 }
 
 function getItem(itemFromFirebase) {
