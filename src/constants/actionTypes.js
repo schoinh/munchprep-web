@@ -1,4 +1,3 @@
-// export const ADD_TICKET = "ADD_TICKET";
+// export const ADD_ITEM = "ADD_ITEM";
 // export const UPDATE_TIME = "UPDATE_TIME";
-// export const SELECT_TICKET = "SELECT_TICKET";
-// export const RECEIVE_TICKET = "RECEIVE_TICKET";
+export const RECEIVE_CATEGORY = "RECEIVE_CATEGORY";

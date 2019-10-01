@@ -19,47 +19,31 @@ export function addItem(_name, _category) {
 
 export function watchFirebaseItems() {
   return function (dispatch) {
-
-    // This promise is not necesary for static categories but will be needed for custom categories
-    const getCategoryNames = new Promise((resolve, reject) => {
-      const categoryNames = [];
-      db.collection("categories").orderBy("timestamp")
-        .onSnapshot(querySnapshot => {
-          querySnapshot.forEach(docSnapshot => {
-            categoryNames.push(docSnapshot.data().name);
-          });
-          resolve(categoryNames);
-          console.log("categoryNames: ", categoryNames);
-        })
-    });
-
-    getCategoryNames.then(result => {
-      result.forEach(categoryName => {
-        db.collection("categories").doc(categoryName).collection("items").orderBy("timestamp", "desc")
-          .onSnapshot(querySnapshot => {
-            // console.log("query snapshot: ", querySnapshot);
-            let items = {};
-            querySnapshot.forEach(docSnapshot => {
-              items[docSnapshot.id] = docSnapshot.data();
-            });
-            console.log("items: ", items);
-          });
+    db.collection("categories").orderBy("timestamp")
+      .onSnapshot(querySnapshot => {
+        querySnapshot.forEach(docSnapshot => {
+          let category = docSnapshot.data();
+          db.collection("categories").doc(category.name).collection("items").orderBy("timestamp", "desc").get()
+            .then(
+              querySnapshot => {
+                // console.log("query snapshot: ", querySnapshot);
+                let items = {};
+                querySnapshot.forEach(docSnapshot => {
+                  items[docSnapshot.id] = docSnapshot.data();
+                });
+                console.log("items: ", items);
+                dispatch(receiveCategory(category, items));
+              }
+            )
+        });
       })
-    });
-
-    // .on('child_added', data => {
-    //   const newTicket = Object.assign({}, data.val(), {
-    //     id: data.getKey(),
-    //     formattedWaitTime: new Moment(data.val().timeOpen).from(new Moment())
-    //   });
-    //   dispatch(receiveTicket(newTicket));
-    // });
   }
 }
 
-function receiveItems(itemsFromFirebase) {
+function receiveCategory(categoryFromFirebase, itemsFromFirebase) {
   return {
-    type: c.RECEIVE_ITEMS,
+    type: c.RECEIVE_CATEGORY,
+    category: categoryFromFirebase,
     items: itemsFromFirebase
-  };
+  }
 }
