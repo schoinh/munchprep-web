@@ -2,8 +2,8 @@ import React from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Menu from "./Menu";
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import ShoppingList from "./ShoppingList";
 
 function UserTabs(props) {
