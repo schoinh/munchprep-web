@@ -24,7 +24,7 @@ function ShoppingList(props) {
   const handleXClick = () => {
     const { dispatch } = props;
     dispatch(clearShoppingList());
-  }
+  };
 
   return (
     <div>

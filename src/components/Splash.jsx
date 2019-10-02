@@ -41,7 +41,9 @@ function Splash() {
   return (
     <div>
       <img style={logoStyles} src={logo} />
-      <Link to="/user-page"><button style={buttonStyles} className="btn btn-light">Sign In with Google</button></Link>
+      <Link to="/user-page"><button id="firebaseui-auth-container" style={buttonStyles} className="btn btn-light">Sign In with Google</button></Link>
+      {/* <div id="firebaseui-auth-container"></div> */}
+      <div id="loader">Loading...</div>
       <div style={githubStyles}>
         MunchPrep on <a href="http://github.com/schoinh/MunchPrep"><img style={githubLogoStyles} src={github} /></a>
       </div>

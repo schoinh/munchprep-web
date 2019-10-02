@@ -1,11 +1,15 @@
 import constants from "./../constants";
-const { firebaseConfig, c } = constants;
+const { firebaseConfig, firebaseUiConfig, c } = constants;
 import * as firebase from "firebase/app";
+var firebaseui = require("firebaseui");
 import "firebase/auth";
 import "firebase/firestore";
 
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
+
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+ui.start("#firebaseui-auth-container", firebaseUiConfig);
 
 const db = firebase.firestore();
 
@@ -16,7 +20,7 @@ export function addItem(_name, _categoryId) {
       checked: false,
       timestamp: new Date().getTime()
     });
-  }
+  };
 }
 
 export function watchFirebaseItems() {
@@ -79,9 +83,9 @@ export function clearShoppingList() {
               querySnapshot.forEach(item => {
                 console.log(item);
                 db.collection("categories").doc(item.ref.parent.parent.id).collection("items").doc(item.id).delete();
-              })
-            })
-        })
-      })
-  }
+              });
+            });
+        });
+      });
+  };
 }
