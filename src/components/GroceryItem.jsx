@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { firebaseToggleChecked } from "./../actions";
+import { toggleChecked } from "./../actions";
 
 function GroceryItem(props) {
   function handleItemClick() {
     const { dispatch } = props;
-    dispatch(firebaseToggleChecked(props.categoryId, props.itemId));
+    dispatch(toggleChecked(props.categoryId, props.itemId));
   }
 
   return (
