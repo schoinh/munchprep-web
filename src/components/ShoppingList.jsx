@@ -11,7 +11,8 @@ import { clearShoppingList } from "./../actions";
 function ShoppingList(props) {
   var iconXStyles = {
     width: "50px",
-    marginTop: "30px"
+    marginTop: "30px",
+    cursor: "pointer"
   };
 
   var iconSweepStyles = {
