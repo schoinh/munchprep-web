@@ -10,11 +10,13 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 export function addItem(_name, _categoryId) {
-  return () => db.collection("categories").doc(_categoryId).collection("items").add({
-    name: _name,
-    checked: false,
-    timestamp: new Date().getTime()
-  });
+  return function () {
+    db.collection("categories").doc(_categoryId).collection("items").add({
+      name: _name,
+      checked: false,
+      timestamp: new Date().getTime()
+    });
+  }
 }
 
 export function watchFirebaseItems() {
@@ -48,7 +50,7 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
 }
 
 export function toggleChecked(categoryId, itemId) {
-  return function (dispatch) {
+  return function () {
     var itemRef = db.collection("categories").doc(categoryId).collection("items").doc(itemId);
     console.log("itemRef: ", itemRef);
     itemRef.get().then(item => {
@@ -64,4 +66,22 @@ export function toggleChecked(categoryId, itemId) {
       }
     });
   };
+}
+
+export function clearShoppingList() {
+  return function () {
+    db.collection("categories").get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          db.collection("categories").doc(doc.id).collection("items").get()
+            .then(querySnapshot => {
+              console.log(querySnapshot);
+              querySnapshot.forEach(item => {
+                console.log(item);
+                db.collection("categories").doc(item.ref.parent.parent.id).collection("items").doc(item.id).delete();
+              })
+            })
+        })
+      })
+  }
 }
