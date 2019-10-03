@@ -24,35 +24,35 @@ function UserPage(props) {
   };
 
   return (
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        <div>
-          <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
-            <div className="mr-auto">
-              <a href="#"><img src={logo} style={logoStyles} /></a>
-              <span className="navbar-text">
-                Jane Doe
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    <div>
+      <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
+        <div className="mr-auto">
+          <a href="/"><img src={logo} style={logoStyles} /></a>
+          <span className="navbar-text">
+            Jane Doe
               </span>
-            </div>
-            <div>
-              <ul className="navbar-nav" style={linkStyles}>
-                <li style={settingsStyles} className="nav-item">
-                  <a className="nav-link">Settings</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Log Out</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-          <div className="container">
-            <UserTabs masterTicketList={props.masterShoppingList} />
-          </div>
-        </div>;
-      } else {
-        <p>No user logged in!</p>;
-      }
-    })
+        </div>
+        <div>
+          <ul className="navbar-nav" style={linkStyles}>
+            <li style={settingsStyles} className="nav-item">
+              <a className="nav-link">Settings</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="#">Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div className="container">
+        <UserTabs masterTicketList={props.masterShoppingList} />
+      </div>
+    </div>
+    //   } else {
+    //     <p>No user logged in!</p>;
+    //   }
+    // })
   );
 }
 

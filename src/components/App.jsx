@@ -6,8 +6,6 @@ import Error404 from "./Error404";
 import Splash from "./Splash";
 import UserPage from "./UserPage";
 import * as actions from "./../actions";
-import firebase from "firebase";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 class App extends React.Component {
   componentDidMount() {

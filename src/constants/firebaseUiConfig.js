@@ -9,12 +9,13 @@ var firebaseUiConfig = {
       // or whether we leave that to developer to handle.
       return true;
     },
-    uiShown: function () {
-      // The widget is rendered.
-      // Hide the loader.
-      document.getElementById("loader").style.display = "none";
-    }
+    // uiShown: function () {
+    //   // The widget is rendered.
+    //   // Hide the loader.
+    //   document.getElementById("loader").style.display = "none";
+    // }
   },
+  signInFlow: "popup",
   signInSuccessUrl: "/#/user-page",
   signInOptions: [
     // Leave the lines as is for the providers you want to offer your users.

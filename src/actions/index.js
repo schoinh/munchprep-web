@@ -8,9 +8,6 @@ import "firebase/firestore";
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-ui.start("#firebaseui-auth-container", firebaseUiConfig);
-
 const db = firebase.firestore();
 
 export function addItem(_name, _categoryId) {
