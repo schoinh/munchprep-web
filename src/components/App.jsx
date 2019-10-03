@@ -30,11 +30,13 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+  isAuthenticated: PropTypes.bool,
   masterShoppingList: PropTypes.object
 };
 
 const mapStateToProps = state => {
   return {
+    isAuthenticated: state.isAuthenticated,
     masterShoppingList: state.masterShoppingList
   };
 };

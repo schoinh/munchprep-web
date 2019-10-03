@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/images/LogoSmall.png";
 import UserTabs from "./UserTabs";
 import PropTypes from "prop-types";
-import { connect, mapStateToProps } from "react-redux";
+import { connect } from "react-redux";
 import * as firebase from "firebase/app";
 
 function UserPage(props) {
@@ -60,7 +60,7 @@ UserPage.propTypes = {
   masterShoppingList: PropTypes.object
 };
 
-const masterStateToProps = (state) => {
+const mapStateToProps = (state) => {
   console.log(state);
   return {
 
