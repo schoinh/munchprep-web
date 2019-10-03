@@ -16,11 +16,6 @@ function Splash() {
     marginBottom: "2em"
   };
 
-  var buttonStyles = {
-    margin: "auto",
-    display: "block"
-  };
-
   var githubStyles = {
     display: "block",
     marginLeft: "auto",
@@ -44,7 +39,6 @@ function Splash() {
   return (
     <div>
       <img style={logoStyles} src={logo} />
-      {/* <Link to="/user-page"><button id="firebaseui-auth-container" style={buttonStyles} className="btn btn-light">Sign In with Google</button></Link> */}
       <StyledFirebaseAuth
         uiConfig={uiConfig}
         firebaseAuth={firebase.auth()} />

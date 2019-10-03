@@ -23,6 +23,10 @@ function UserPage(props) {
     marginRight: "1em"
   };
 
+  const handleLogOutClick = () => {
+
+  }
+
   return (
     // firebase.auth().onAuthStateChanged((user) => {
     //   if (user) {
@@ -31,8 +35,8 @@ function UserPage(props) {
         <div className="mr-auto">
           <a href="/"><img src={logo} style={logoStyles} /></a>
           <span className="navbar-text">
-            Jane Doe
-              </span>
+            {firebase.auth().currentUser.displayName}
+          </span>
         </div>
         <div>
           <ul className="navbar-nav" style={linkStyles}>
@@ -40,7 +44,7 @@ function UserPage(props) {
               <a className="nav-link">Settings</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Log Out</a>
+              <a className="nav-link" onClick={handleLogOutClick} href="/">Log Out</a>
             </li>
           </ul>
         </div>
