@@ -32,7 +32,7 @@ function UserPage(props) {
               <a href="#"><img src={logo} style={logoStyles} /></a>
               <span className="navbar-text">
                 Jane Doe
-          </span>
+              </span>
             </div>
             <div>
               <ul className="navbar-nav" style={linkStyles}>
@@ -48,9 +48,9 @@ function UserPage(props) {
           <div className="container">
             <UserTabs masterTicketList={props.masterShoppingList} />
           </div>
-        </div>
+        </div>;
       } else {
-        <p>No user logged in!</p>
+        <p>No user logged in!</p>;
       }
     })
   );

@@ -1,12 +1,12 @@
 // import selectedTicketReducer from './selected-ticket-reducer';
 import shoppingListReducer from "./shopping-list-reducer";
+import authReducer from "./auth-reducer";
 import { combineReducers } from "redux";
-import { firebaseReducer } from "react-redux-firebase";
 
 const rootReducer = combineReducers({
   // selectedTicket: selectedTicketReducer,
   masterShoppingList: shoppingListReducer,
-  firebaseAuth: firebaseReducer
+  isAuthenticated: authReducer
 });
 
 export default rootReducer;
