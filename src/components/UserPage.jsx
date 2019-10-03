@@ -24,8 +24,8 @@ function UserPage(props) {
   };
 
   const handleLogOutClick = () => {
-
-  }
+    firebase.auth().signOut();
+  };
 
   return (
     // firebase.auth().onAuthStateChanged((user) => {
@@ -33,7 +33,7 @@ function UserPage(props) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
         <div className="mr-auto">
-          <a href="/"><img src={logo} style={logoStyles} /></a>
+          <img src={logo} style={logoStyles} />
           <span className="navbar-text">
             {firebase.auth().currentUser.displayName}
           </span>

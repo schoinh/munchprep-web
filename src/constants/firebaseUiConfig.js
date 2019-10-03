@@ -18,8 +18,13 @@ var firebaseUiConfig = {
   signInFlow: "popup",
   signInSuccessUrl: "/#/user-page",
   signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    {
+      // Leave the lines as is for the providers you want to offer your users.
+      provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      customParameters: {
+        prompt: "select_account"
+      }
+    }
   ],
   // Terms of service url.
   // tosUrl: '<your-tos-url>',
