@@ -11,7 +11,8 @@ const db = firebase.firestore();
 
 export function addItem(_name, _categoryId) {
   return function () {
-    db.collection("categories").doc(_categoryId).collection("items").add({
+    const userId = firebase.auth().currentUser.uid;
+    db.collection("users").doc(userId).collection("categories").doc(_categoryId).collection("items").add({
       name: _name,
       checked: false,
       timestamp: Date.now()
@@ -92,7 +93,8 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
 
 export function toggleChecked(categoryId, itemId) {
   return function () {
-    var itemRef = db.collection("categories").doc(categoryId).collection("items").doc(itemId);
+    const userId = firebase.auth().currentUser.uid;
+    var itemRef = db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(itemId);
     console.log("itemRef: ", itemRef);
     itemRef.get().then(item => {
       console.log("item.data(): ", item.data());
@@ -111,15 +113,17 @@ export function toggleChecked(categoryId, itemId) {
 
 export function clearShoppingList() {
   return function () {
-    db.collection("categories").get()
+    const userId = firebase.auth().currentUser.uid;
+    db.collection("users").doc(userId).collection("categories").get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          db.collection("categories").doc(doc.id).collection("items").get()
+          let categoryId = doc.id;
+          db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").get()
             .then(querySnapshot => {
               console.log(querySnapshot);
               querySnapshot.forEach(item => {
                 console.log(item);
-                db.collection("categories").doc(item.ref.parent.parent.id).collection("items").doc(item.id).delete();
+                db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(item.id).delete();
               });
             });
         });

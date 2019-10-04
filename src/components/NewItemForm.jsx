@@ -4,6 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
 import { addItem } from "./../actions";
+import PropTypes from "prop-types";
 
 function NewItemForm(props) {
   var inputStyle = {
@@ -41,14 +42,28 @@ function NewItemForm(props) {
         ref={(input) => { _name = input; }} />
       <div className="d-flex flex-column">
         <ButtonGroup style={buttonStyle}>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="0LPUR8dEnHACoX22Bjjw">Produce</Button>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="TX1p7g1EpNmkDCz9S6rz">Proteins</Button>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="YjATY4IT4FXZF0HGJspb">Other Foods</Button>
-          <Button variant="secondary" onClick={handleNewItemFormSubmit} value="bLnOIoiWyUukXD8DsytE">Non-Foods</Button>
+          {Object.keys(props.masterShoppingList).map(categoryId => {
+            let category = props.masterShoppingList[categoryId];
+            return <Button
+              variant="secondary"
+              onClick={handleNewItemFormSubmit}
+              key={categoryId}
+              value={categoryId}>{category.name}</Button>;
+          })}
         </ButtonGroup>
       </div>
     </div>
   );
 }
 
-export default connect()(NewItemForm);
+NewItemForm.propTypes = {
+  masterShoppingList: PropTypes.object
+};
+
+const mapStateToProps = (state) => {
+  return {
+    masterShoppingList: state.masterShoppingList
+  };
+};
+
+export default connect(mapStateToProps)(NewItemForm);
