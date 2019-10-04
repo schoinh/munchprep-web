@@ -9,9 +9,12 @@ import * as actions from "./../actions";
 class SignedIn extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    const { signIn } = actions;
+    const { signIn, watchFirebaseItems } = actions;
     firebase.auth().onAuthStateChanged(user => {
       dispatch(signIn(!!user));
+      if (user) {
+        dispatch(watchFirebaseItems());
+      }
     });
   }
 
@@ -33,7 +36,6 @@ SignedIn.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     isAuthenticated: state.isAuthenticated
   };
