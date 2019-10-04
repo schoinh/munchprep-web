@@ -30,8 +30,8 @@ function ShoppingList(props) {
     <div>
       <NewItemForm />
       <CardGroup>
-        {Object.keys(props.masterTicketList).map(categoryId => {
-          let category = props.masterTicketList[categoryId];
+        {Object.keys(props.masterShoppingList).map(categoryId => {
+          let category = props.masterShoppingList[categoryId];
           return <Category
             name={category.name}
             items={category.items}
@@ -46,7 +46,7 @@ function ShoppingList(props) {
 }
 
 ShoppingList.propTypes = {
-  masterTicketList: PropTypes.object
+  masterShoppingList: PropTypes.object
 };
 
 export default connect()(ShoppingList);

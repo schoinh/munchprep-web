@@ -44,7 +44,7 @@ function UserPage(props) {
         </div>
       </nav>
       <div className="container">
-        <UserTabs masterTicketList={props.masterShoppingList} />
+        <UserTabs masterShoppingList={props.masterShoppingList} />
       </div>
     </div>
   );
