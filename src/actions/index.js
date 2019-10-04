@@ -1,7 +1,7 @@
 import constants from "./../constants";
-const { firebaseConfig, firebaseUiConfig, c } = constants;
+const { firebaseConfig, c } = constants;
 import * as firebase from "firebase/app";
-var firebaseui = require("firebaseui");
+// var firebaseui = require("firebaseui");
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -19,23 +19,59 @@ export function addItem(_name, _categoryId) {
     });
   };
 }
-
-export function watchFirebaseItems() {
+export function startFirebaseComm(userId) {
   return function (dispatch) {
-    db.collection("categories").orderBy("timestamp")
+    db.collection("users").doc(userId).get().then(user => {
+      if (user.exists) {
+        dispatch(setFirebaseListener(userId));
+      } else {
+        var collectionRef = db.collection("users").doc(userId).collection("categories");
+        collectionRef.add({
+          name: "Produce",
+          timestamp: Date.now()
+        })
+          .then(() => {
+            collectionRef.add({
+              name: "Proteins",
+              timestamp: Date.now()
+            });
+          })
+          .then(() => {
+            collectionRef.add({
+              name: "Other Foods",
+              timestamp: Date.now()
+            });
+          })
+          .then(() => {
+            collectionRef.add({
+              name: "Non-Foods",
+              timestamp: Date.now()
+            });
+          })
+          .then(() => {
+            dispatch(setFirebaseListener(userId));
+          });
+      }
+    });
+  };
+}
+
+function setFirebaseListener(userId) {
+  return function (dispatch) {
+    db.collection("users").doc(userId).collection("categories").orderBy("timestamp")
       .onSnapshot(categoryCollectionSnapshot => {
         categoryCollectionSnapshot.forEach(categorySnapshot => {
           let categoryId = categorySnapshot.id;
           let category = categorySnapshot.data();
-          db.collection("categories").doc(categoryId).collection("items").orderBy("timestamp", "desc").onSnapshot(
-            itemsCollectionSnapshot => {
+          db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").orderBy("timestamp", "desc")
+            .onSnapshot(itemsCollectionSnapshot => {
               let items = {};
               itemsCollectionSnapshot.forEach(itemSnapshot => {
                 items[itemSnapshot.id] = itemSnapshot.data();
               });
               dispatch(receiveCategory(categoryId, category, items));
             }
-          );
+            );
         });
       });
   };
