@@ -86,3 +86,10 @@ export function clearShoppingList() {
       });
   };
 }
+
+export function signIn(newAuthStatus) {
+  return {
+    type: c.SIGN_IN,
+    newAuthStatus: newAuthStatus
+  };
+}

@@ -28,8 +28,6 @@ function UserPage(props) {
   };
 
   return (
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
         <div className="mr-auto">
@@ -53,10 +51,6 @@ function UserPage(props) {
         <UserTabs masterTicketList={props.masterShoppingList} />
       </div>
     </div>
-    //   } else {
-    //     <p>No user logged in!</p>;
-    //   }
-    // })
   );
 }
 
@@ -65,9 +59,8 @@ UserPage.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
-
+    masterShoppingList: state.masterShoppingList
   };
 };
 

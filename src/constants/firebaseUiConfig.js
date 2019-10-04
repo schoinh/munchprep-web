@@ -16,7 +16,7 @@ var firebaseUiConfig = {
     // }
   },
   signInFlow: "popup",
-  signInSuccessUrl: "/#/user-page",
+  signInSuccessUrl: "/#/signed-in",
   signInOptions: [
     {
       // Leave the lines as is for the providers you want to offer your users.
