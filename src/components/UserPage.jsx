@@ -2,6 +2,8 @@ import React from "react";
 import logo from "../assets/images/LogoSmall.png";
 import UserTabs from "./UserTabs";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import * as firebase from "firebase/app";
 
 function UserPage(props) {
   var navBarStyles = {
@@ -25,9 +27,9 @@ function UserPage(props) {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
         <div className="mr-auto">
-          <a href="#"><img src={logo} style={logoStyles} /></a>
+          <img src={logo} style={logoStyles} />
           <span className="navbar-text">
-            Jane Doe
+            {firebase.auth().currentUser.displayName}
           </span>
         </div>
         <div>
@@ -36,7 +38,7 @@ function UserPage(props) {
               <a className="nav-link">Settings</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Log Out</a>
+              <a className="nav-link" onClick={() => { firebase.auth().signOut(); }} href="/">Log Out</a>
             </li>
           </ul>
         </div>
@@ -52,4 +54,10 @@ UserPage.propTypes = {
   masterShoppingList: PropTypes.object
 };
 
-export default UserPage;
+const mapStateToProps = (state) => {
+  return {
+    masterShoppingList: state.masterShoppingList
+  };
+};
+
+export default connect(mapStateToProps)(UserPage);

@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/Logo.png";
 import github from "../assets/images/GitHub_Logo.png";
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import uiConfig from "../constants/firebaseUiConfig";
 
 function Splash() {
   var logoStyles = {
@@ -11,11 +14,6 @@ function Splash() {
     marginLeft: "auto",
     marginTop: "50px",
     marginBottom: "2em"
-  };
-
-  var buttonStyles = {
-    margin: "auto",
-    display: "block"
   };
 
   var githubStyles = {
@@ -41,7 +39,9 @@ function Splash() {
   return (
     <div>
       <img style={logoStyles} src={logo} />
-      <Link to="/user-page"><button style={buttonStyles} className="btn btn-light">Sign In with Google</button></Link>
+      <StyledFirebaseAuth
+        uiConfig={uiConfig}
+        firebaseAuth={firebase.auth()} />
       <div style={githubStyles}>
         MunchPrep on <a href="http://github.com/schoinh/MunchPrep"><img style={githubLogoStyles} src={github} /></a>
       </div>
