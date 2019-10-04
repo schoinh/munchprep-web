@@ -23,10 +23,6 @@ function UserPage(props) {
     marginRight: "1em"
   };
 
-  const handleLogOutClick = () => {
-    firebase.auth().signOut();
-  };
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
@@ -42,7 +38,7 @@ function UserPage(props) {
               <a className="nav-link">Settings</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" onClick={handleLogOutClick} href="/">Log Out</a>
+              <a className="nav-link" onClick={() => { firebase.auth().signOut(); }} href="/">Log Out</a>
             </li>
           </ul>
         </div>
