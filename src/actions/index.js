@@ -87,9 +87,9 @@ export function clearShoppingList() {
   };
 }
 
-export function signIn(newAuthStatus) {
+export function toggleAuth(newAuthStatus) {
   return {
-    type: c.SIGN_IN,
+    type: c.TOGGLE_AUTH,
     newAuthStatus: newAuthStatus
   };
 }

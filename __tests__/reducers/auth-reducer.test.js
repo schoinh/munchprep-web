@@ -11,10 +11,19 @@ describe("authReducer", () => {
 
   test("Should change state to signed in when user signs in", () => {
     action = {
-      type: c.SIGN_IN,
+      type: c.TOGGLE_AUTH,
       newAuthStatus: true
     };
 
     expect(authReducer(initialState.isAuthenticated, action)).toEqual(true);
+  });
+
+  test("Should change state to signed out when user signs out", () => {
+    action = {
+      type: c.TOGGLE_AUTH,
+      newAuthStatus: false
+    };
+
+    expect(authReducer(initialState.isAuthenticated, action)).toEqual(false);
   });
 });

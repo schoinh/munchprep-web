@@ -3,7 +3,7 @@ const { c, initialState } = constants;
 
 export default (state = initialState.isAuthenticated, action) => {
   switch (action.type) {
-  case c.SIGN_IN:
+  case c.TOGGLE_AUTH:
     return action.newAuthStatus;
 
   default:

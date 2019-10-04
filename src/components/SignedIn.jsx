@@ -9,9 +9,9 @@ import * as actions from "./../actions";
 class SignedIn extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    const { signIn, watchFirebaseItems } = actions;
+    const { toggleAuth, watchFirebaseItems } = actions;
     firebase.auth().onAuthStateChanged(user => {
-      dispatch(signIn(!!user));
+      dispatch(toggleAuth(!!user));
       if (user) {
         dispatch(watchFirebaseItems());
       }
