@@ -14,7 +14,7 @@ class SignedIn extends React.Component {
       dispatch(toggleAuth(!!user));
       if (user) {
         // console.log("firebase.auth().currentUser: ", firebase.auth().currentUser);
-        dispatch(startFirebaseComm(firebase.auth().currentUser.uid));
+        dispatch(startFirebaseComm(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName));
       }
     });
   }
@@ -25,8 +25,8 @@ class SignedIn extends React.Component {
         {this.props.isAuthenticated ? (
           <UserPage />
         ) : (
-          <Splash />
-        )}
+            <Splash />
+          )}
       </div>
     );
   }

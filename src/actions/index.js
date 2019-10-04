@@ -1,7 +1,6 @@
 import constants from "./../constants";
 const { firebaseConfig, c } = constants;
 import * as firebase from "firebase/app";
-// var firebaseui = require("firebaseui");
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -15,41 +14,46 @@ export function addItem(_name, _categoryId) {
     db.collection("categories").doc(_categoryId).collection("items").add({
       name: _name,
       checked: false,
-      timestamp: new Date().getTime()
+      timestamp: Date.now()
     });
   };
 }
-export function startFirebaseComm(userId) {
+export function startFirebaseComm(userId, userName) {
   return function (dispatch) {
-    db.collection("users").doc(userId).get().then(user => {
+    db.collection("users").doc(userId).get().then((user) => {
       if (user.exists) {
         dispatch(setFirebaseListener(userId));
       } else {
-        var collectionRef = db.collection("users").doc(userId).collection("categories");
-        collectionRef.add({
-          name: "Produce",
-          timestamp: Date.now()
+        db.collection("users").doc(userId).set({
+          name: userName
         })
           .then(() => {
+            var collectionRef = db.collection("users").doc(userId).collection("categories");
             collectionRef.add({
-              name: "Proteins",
+              name: "Produce",
               timestamp: Date.now()
-            });
-          })
-          .then(() => {
-            collectionRef.add({
-              name: "Other Foods",
-              timestamp: Date.now()
-            });
-          })
-          .then(() => {
-            collectionRef.add({
-              name: "Non-Foods",
-              timestamp: Date.now()
-            });
-          })
-          .then(() => {
-            dispatch(setFirebaseListener(userId));
+            })
+              .then(() => {
+                collectionRef.add({
+                  name: "Proteins",
+                  timestamp: Date.now() + 1
+                });
+              })
+              .then(() => {
+                collectionRef.add({
+                  name: "Other Foods",
+                  timestamp: Date.now() + 2
+                });
+              })
+              .then(() => {
+                collectionRef.add({
+                  name: "Non-Foods",
+                  timestamp: Date.now() + 3
+                });
+              })
+              .then(() => {
+                dispatch(setFirebaseListener(userId));
+              });
           });
       }
     });
