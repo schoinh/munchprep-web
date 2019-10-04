@@ -24,8 +24,8 @@ class SignedIn extends React.Component {
         {this.props.isAuthenticated ? (
           <UserPage />
         ) : (
-            <Splash />
-          )}
+          <Splash />
+        )}
       </div>
     );
   }
