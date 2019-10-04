@@ -26,8 +26,10 @@ function NewItemForm(props) {
   let _name = null;
 
   function handleNewItemFormSubmit(event) {
-    dispatch(addItem(_name.value, event.target.value));
-    _name.value = "";
+    if (_name.value) {
+      dispatch(addItem(_name.value, event.target.value));
+      _name.value = "";
+    }
   }
 
   return (
