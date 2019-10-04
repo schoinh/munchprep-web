@@ -9,99 +9,57 @@ function Menu() {
     1: {
       name: "Sunday",
       meals: {
-        "breakfast": {
-          name: "Scrambled eggs"
-        },
-        "lunch": {
-          name: "Cobb salad"
-        },
-        "dinner": {
-          name: "Grilled salmon"
-        }
+        breakfast: "Scrambled eggs",
+        lunch: "Cobb salad",
+        dinner: "Grilled salmon"
       }
     },
     2: {
       name: "Monday",
       meals: {
-        "breakfast": {
-          name: "Frittata"
-        },
-        "lunch": {
-          name: "Chicken sandwich"
-        },
-        "dinner": {
-          name: "Green curry"
-        }
+        breakfast: "Frittata",
+        lunch: "Chicken sandwich",
+        dinner: "Green curry"
       }
     },
     3: {
       name: "Tuesday",
       meals: {
-        "breakfast": {
-          name: "Cereal"
-        },
-        "lunch": {
-          name: "Leftover curry"
-        },
-        "dinner": {
-          name: "Takeout"
-        }
+        breakfast: "Cereal",
+        lunch: "Leftover curry",
+        dinner: "Takeout"
       }
     },
     4: {
       name: "Wednesday",
       meals: {
-        "breakfast": {
-          name: "Scrambled eggs"
-        },
-        "lunch": {
-          name: "Turkey hash"
-        },
-        "dinner": {
-          name: "Kalua pork"
-        }
+        breakfast: "Scrambled eggs",
+        lunch: "Turkey hash",
+        dinner: "Kalua pork"
       }
     },
     5: {
       name: "Thursday",
       meals: {
-        "breakfast": {
-          name: "Cereal"
-        },
-        "lunch": {
-          name: "Egg salad"
-        },
-        "dinner": {
-          name: "Pizza"
-        }
+        breakfast: "Cereal",
+        lunch: "Egg salad",
+        dinner: "Pizza"
       }
     },
     6: {
       name: "Friday",
       meals: {
-        "breakfast": {
-          name: "Grits"
-        },
-        "lunch": {
-          name: "Chipotle"
-        },
-        "dinner": {
-          name: "Jerk chicken"
-        }
+        breakfast: "Grits",
+        lunch: "Chipotle",
+        dinner: "Jerk chicken"
       }
     },
     7: {
       name: "Saturday",
       meals: {
-        "breakfast": {
-          name: "Pancakes"
-        },
-        "lunch": {
-          name: "Poke bowl"
-        },
-        "dinner": {
-          name: "Bulgogi"
-        }
+        breakfast: "Pancakes",
+        lunch: "Poke bowl",
+        dinner: "Bulgogi"
       }
     }
   };

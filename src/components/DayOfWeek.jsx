@@ -15,9 +15,9 @@ function DayOfWeek(props) {
         {props.name}
       </div>
       <div className="card-body">
-        {props.meals.breakfast.name}<br />
-        {props.meals.lunch.name}<br />
-        {props.meals.dinner.name}
+        {props.meals.breakfast}<br />
+        {props.meals.lunch}<br />
+        {props.meals.dinner}
       </div>
     </div>
   );
