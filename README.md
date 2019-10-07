@@ -20,24 +20,27 @@ Mock-ups, a React component diagram, and other design documents are included in 
     ```
     $ npm install
     ```
-3. Build distribution files:
+3. Run development server:
     ```
-    $ webpack
+    $ npm start
     ```
-4. Open the web page (dist/index.html)
+4. Navigate in your browser (Chrome recommended) to http://localhost:8080
 
 ## Known Bugs
 * No known bugs at this time.
 
 ## Technologies Used
 * JavaScript
-* React
+* React / Redux
+* Firebase (Cloud Firestore, Authentication, Hosting)
+* Jest
+* Bootstrap
 * webpack
 * npm
 
 ## Support and contact details
 
-_Please contact Na Hyung with questions and comments._
+_Please email Na Hyung with questions and comments._
 
 ### License
 
