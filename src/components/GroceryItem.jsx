@@ -26,7 +26,8 @@ GroceryItem.propTypes = {
   name: PropTypes.string,
   itemId: PropTypes.string,
   categoryId: PropTypes.string,
-  checked: PropTypes.bool
+  checked: PropTypes.bool,
+  dispatch: PropTypes.func
 };
 
 export default connect()(GroceryItem);

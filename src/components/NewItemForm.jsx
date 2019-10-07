@@ -57,7 +57,8 @@ function NewItemForm(props) {
 }
 
 NewItemForm.propTypes = {
-  masterShoppingList: PropTypes.object
+  masterShoppingList: PropTypes.object,
+  dispatch: PropTypes.func
 };
 
 const mapStateToProps = (state) => {

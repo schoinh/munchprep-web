@@ -3,7 +3,7 @@ import logo from "../assets/images/LogoSmall.png";
 import UserTabs from "./UserTabs";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 
 function UserPage(props) {
   var navBarStyles = {

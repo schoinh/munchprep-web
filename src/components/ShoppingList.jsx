@@ -46,7 +46,8 @@ function ShoppingList(props) {
 }
 
 ShoppingList.propTypes = {
-  masterShoppingList: PropTypes.object
+  masterShoppingList: PropTypes.object,
+  dispatch: PropTypes.func
 };
 
 export default connect()(ShoppingList);

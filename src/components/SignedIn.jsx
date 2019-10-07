@@ -3,7 +3,7 @@ import UserPage from "./UserPage";
 import Splash from "./Splash";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import * as actions from "./../actions";
 
 class SignedIn extends React.Component {
@@ -13,7 +13,6 @@ class SignedIn extends React.Component {
     firebase.auth().onAuthStateChanged(user => {
       dispatch(toggleAuth(!!user));
       if (user) {
-        // console.log("firebase.auth().currentUser: ", firebase.auth().currentUser);
         dispatch(startFirebaseComm(firebase.auth().currentUser.uid, firebase.auth().currentUser.displayName));
       }
     });
@@ -25,15 +24,16 @@ class SignedIn extends React.Component {
         {this.props.isAuthenticated ? (
           <UserPage />
         ) : (
-            <Splash />
-          )}
+          <Splash />
+        )}
       </div>
     );
   }
 }
 
 SignedIn.propTypes = {
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  dispatch: PropTypes.func
 };
 
 const mapStateToProps = (state) => {

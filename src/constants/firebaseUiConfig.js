@@ -1,9 +1,8 @@
-var firebase = require("firebase");
-var firebaseui = require("firebaseui");
+import firebase from "firebase/app";
 
 var firebaseUiConfig = {
   callbacks: {
-    signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+    signInSuccessWithAuthResult: function () {
       // User successfully signed in.
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.

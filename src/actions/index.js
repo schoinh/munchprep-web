@@ -1,6 +1,6 @@
 import constants from "./../constants";
 const { firebaseConfig, c } = constants;
-import * as firebase from "firebase/app";
+import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -18,7 +18,7 @@ export function addItem(_name, _categoryId) {
       timestamp: Date.now()
     });
   };
-};
+}
 
 export function startFirebaseComm(userId, userName) {
   return function (dispatch) {
@@ -34,7 +34,7 @@ export function startFirebaseComm(userId, userName) {
             collectionRef.add({
               name: "Produce",
               timestamp: Date.now()
-            })
+            });
           })
           .then(() => {
             collectionRef.add({
@@ -96,9 +96,7 @@ export function toggleChecked(categoryId, itemId) {
   return function () {
     const userId = firebase.auth().currentUser.uid;
     var itemRef = db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(itemId);
-    console.log("itemRef: ", itemRef);
     itemRef.get().then(item => {
-      console.log("item.data(): ", item.data());
       if (item.data().checked == true) {
         itemRef.update({
           "checked": false
@@ -121,9 +119,7 @@ export function clearShoppingList() {
           let categoryId = doc.id;
           db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").get()
             .then(querySnapshot => {
-              console.log(querySnapshot);
               querySnapshot.forEach(item => {
-                console.log(item);
                 db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(item.id).delete();
               });
             });

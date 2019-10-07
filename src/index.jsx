@@ -12,10 +12,6 @@ import "bootstrap/dist/js/bootstrap.js";
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-);
-
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
