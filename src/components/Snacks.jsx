@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 function Snacks(props) {
   var SnacksStyles = {
@@ -27,7 +28,14 @@ function Snacks(props) {
 }
 
 Snacks.propTypes = {
-  snacks: PropTypes.string
+  snacks: PropTypes.string,
+  dispatch: PropTypes.func
 };
 
-export default Snacks;
+const mapStateToProps = (state) => {
+  return {
+    snacks: state.snacks
+  }
+}
+
+export default connect(mapStateToProps)(Snacks);
