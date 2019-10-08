@@ -67,7 +67,7 @@ function setFirebaseListener(userId) {
   return function (dispatch) {
     db.collection("users").doc(userId).onSnapshot(userSnapshot => {
       let snacks = userSnapshot.data().snacks;
-      dispatch()
+      dispatch(receiveSnacks(snacks));
     });
 
     db.collection("users").doc(userId).collection("categories").orderBy("timestamp")
@@ -86,6 +86,13 @@ function setFirebaseListener(userId) {
             );
         });
       });
+  };
+}
+
+function receiveSnacks(snacksFromFirebase) {
+  return {
+    type: c.RECEIVE_SNACKS,
+    newSnacks: snacksFromFirebase
   };
 }
 
