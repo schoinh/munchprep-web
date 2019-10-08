@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { RIETextArea } from "@attently/riek";
+import firebase from "firebase/app";
 
 function Snacks(props) {
   var SnacksStyles = {
@@ -15,13 +17,20 @@ function Snacks(props) {
     backgroundColor: "#5ce1e6"
   };
 
+  function handleSnacksEdit(userId) {
+    console.log(userId + "handleSnacksEdit has been called");
+  }
+
   return (
     <div style={SnacksStyles} className="card">
       <div className="card-header" style={headerStyles}>
         Snacks
       </div>
       <div className="card-body">
-        {props.snacks}
+        <RIETextArea
+          value={props.snacks}
+          change={handleSnacksEdit}
+          propName={firebase.auth().currentUser.uid} /><br />
       </div>
     </div>
   );
