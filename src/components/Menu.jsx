@@ -1,10 +1,12 @@
 import React from "react";
-// import CardGroup from "react-bootstrap/CardGroup";
 import DayOfWeek from "./DayOfWeek";
+import PropTypes from "prop-types";
 import iconX from "../assets/images/icon-x.png";
 import Snacks from "./Snacks";
+import { connect } from "react-redux";
+import { clearMenu } from "./../actions";
 
-function Menu() {
+function Menu(props) {
   let menusByDay = {
     1: {
       name: "Sunday",
@@ -81,6 +83,11 @@ function Menu() {
     float: "left"
   };
 
+  const handleXClick = () => {
+    const { dispatch } = props;
+    dispatch(clearMenu());
+  };
+
   return (
     <div>
       <div className="row justify-content-center" style={menuStyles}>
@@ -105,10 +112,15 @@ function Menu() {
         </div>
       </div>
       <div className="row">
-        <img src={iconX} style={iconXStyles} />
+        <img src={iconX} onClick={handleXClick} style={iconXStyles} />
       </div>
     </div>
   );
 }
 
-export default Menu;
+Menu.propTypes = {
+  masterMenu: PropTypes.object,
+  dispatch: PropTypes.func
+};
+
+export default connect()(Menu);
