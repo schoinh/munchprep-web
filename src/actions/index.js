@@ -28,7 +28,8 @@ export function startFirebaseComm(userId, userName) {
       } else {
         var collectionRef = db.collection("users").doc(userId).collection("categories");
         db.collection("users").doc(userId).set({
-          name: userName
+          name: userName,
+          snacks: ""
         })
           .then(() => {
             collectionRef.add({
@@ -64,6 +65,11 @@ export function startFirebaseComm(userId, userName) {
 
 function setFirebaseListener(userId) {
   return function (dispatch) {
+    db.collection("users").doc(userId).onSnapshot(userSnapshot => {
+      let snacks = userSnapshot.data().snacks;
+      dispatch()
+    });
+
     db.collection("users").doc(userId).collection("categories").orderBy("timestamp")
       .onSnapshot(categoryCollectionSnapshot => {
         categoryCollectionSnapshot.forEach(categorySnapshot => {

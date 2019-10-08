@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "build": "webpack",
     "start": "eslint src/index.jsx src/components/** src/constants/** src/reducers/** src/actions/** --fix; webpack-dev-server; exit 0",
     "lint": "eslint src/index.jsx src/components/** src/constants/** src/reducers/** src/actions/**; exit 0",
