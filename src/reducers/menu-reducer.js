@@ -3,10 +3,10 @@ const { c, initialState } = constants;
 
 export default (state = initialState.menu, action) => {
   switch (action.type) {
-    // case c.RECEIVE_SNACKS:
-    //   return action.menu;
+  // case c.RECEIVE_SNACKS:
+  //   return action.menu;
 
-    default:
-      return state;
+  default:
+    return state;
   }
 };
