@@ -71,11 +71,33 @@ export function startFirebaseComm(userId, userName) {
 
 function setFirestoreListener(userId) {
   return function (dispatch) {
+
+    // Listen for menu updates
+    const menuRef = db.collection("users").doc(userId).collection("menu");
+    menuRef.onSnapshot(menuSnapshot => {
+      menuSnapshot.forEach(daySnapshot => {
+        console.log("daySnapshot:", daySnapshot);
+        let dayId = daySnapshot.id;
+        let dayName = daySnapshot.data().dayName;
+        let mealsForDay = daySnapshot.data().meals;
+        console.log("daySnapshot.data(): ", menuForDay);
+        // menuRef.doc(dayId).collection("meals").orderBy("timestamp", "desc")
+        //   .onSnapshot(itemsCollectionSnapshot => {
+        //     let items = {};
+        //     itemsCollectionSnapshot.forEach(itemSnapshot => {
+        //       items[itemSnapshot.id] = itemSnapshot.data();
+        //     });
+        dispatch(receiveMeals(dayId, dayName, mealsForDay));
+      });
+    });
+
+    // Listen for snack updates
     db.collection("users").doc(userId).onSnapshot(userSnapshot => {
       let snacks = userSnapshot.data().snacks;
       dispatch(receiveSnacks(snacks));
     });
 
+    // Listen for shopping list updates
     const categoriesRef = db.collection("users").doc(userId).collection("categories");
     categoriesRef.orderBy("timestamp")
       .onSnapshot(categoryCollectionSnapshot => {
@@ -93,6 +115,15 @@ function setFirestoreListener(userId) {
             );
         });
       });
+  };
+};
+
+function receiveMeals(dayId, dayName, mealsFromFirebase) {
+  return {
+    type: c.RECEIVE_MEALS,
+    dayId: dayId,
+    dayName: dayName,
+    meals: mealsFromFirebase
   };
 }
 
@@ -165,9 +196,9 @@ export function clearShoppingList() {
   };
 }
 
-//------------------------------//
-// MEAL PLANNING (MENU) ACTIONS //
-//------------------------------//
+//---------------------------------------//
+// MEAL PLANNING (MENU + SNACKS) ACTIONS //
+//---------------------------------------//
 
 export function updateSnacks(snacksKeyValue) {
   return function () {

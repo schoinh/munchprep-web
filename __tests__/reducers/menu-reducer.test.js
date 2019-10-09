@@ -9,12 +9,27 @@ describe("menuReducer", () => {
     expect(menuReducer(initialState.menu, { type: null })).toEqual({});
   });
 
-  test("Should update meal when a specific meal is changed", () => {
+  test("Should update meals when meals are changed", () => {
     action = {
-      type: c.RECEIVE_MEAL,
-      menu: "Tomatoes"
+      type: c.RECEIVE_MEALS,
+      dayId: 0,
+      dayName: "Sunday",
+      meals: {
+        breakfast: "eggs",
+        lunch: "sandwich",
+        dinner: "pizza"
+      }
     };
 
-    expect(menuReducer(initialState.menu, action)).toEqual("Tomatoes");
+    expect(menuReducer(initialState.menu, action)).toEqual({
+      0: {
+        dayName: "Sunday",
+        meals: {
+          breakfast: "eggs",
+          lunch: "sandwich",
+          dinner: "pizza"
+        }
+      }
+    });
   });
 });
