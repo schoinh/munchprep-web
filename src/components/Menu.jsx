@@ -7,67 +7,6 @@ import { connect } from "react-redux";
 import { clearMenu } from "./../actions";
 
 function Menu(props) {
-  let menusByDay = {
-    0: {
-      name: "Sunday",
-      meals: {
-        breakfast: "Scrambled eggs",
-        lunch: "Cobb salad",
-        dinner: "Grilled salmon"
-      }
-    },
-    1: {
-      name: "Monday",
-      meals: {
-        breakfast: "Frittata",
-        lunch: "Chicken sandwich",
-        dinner: "Green curry"
-      }
-    },
-    2: {
-      name: "Tuesday",
-      meals: {
-        breakfast: "Cereal",
-        lunch: "Leftover curry",
-        dinner: "Takeout"
-      }
-    },
-    3: {
-      name: "Wednesday",
-      meals: {
-        breakfast: "Scrambled eggs",
-        lunch: "Turkey hash",
-        dinner: "Kalua pork"
-      }
-    },
-    4: {
-      name: "Thursday",
-      meals: {
-        breakfast: "Cereal",
-        lunch: "Egg salad",
-        dinner: "Pizza"
-      }
-    },
-    5: {
-      name: "Friday",
-      meals: {
-        breakfast: "Grits",
-        lunch: "Chipotle",
-        dinner: "Jerk chicken"
-      }
-    },
-    6: {
-      name: "Saturday",
-      meals: {
-        breakfast: "Pancakes",
-        lunch: "Poke bowl",
-        dinner: "Bulgogi"
-      }
-    }
-  };
-
-  let snacks = "Carrots, pistachios";
-
   var menuStyles = {
     marginTop: "2em"
   };
@@ -80,7 +19,8 @@ function Menu(props) {
   var iconXStyles = {
     width: "50px",
     marginTop: "30px",
-    float: "left"
+    float: "left",
+    cursor: "pointer"
   };
 
   const handleXClick = () => {
@@ -92,23 +32,25 @@ function Menu(props) {
     <div>
       <div className="row justify-content-center" style={menuStyles}>
         <div style={columnStyles}>
-          {Object.keys(menusByDay).filter(dayId => dayId < 4).map(dayId => {
-            let day = menusByDay[dayId];
+          {Object.keys(props.menu).filter(dayId => dayId < 4).map(dayId => {
+            let day = props.menu[dayId];
             return <DayOfWeek
-              name={day.name}
+              dayId={dayId}
+              name={day.dayName}
               meals={day.meals}
               key={dayId} />;
           })}
         </div>
         <div style={columnStyles}>
-          {Object.keys(menusByDay).filter(dayId => dayId > 3).map(dayId => {
-            let day = menusByDay[dayId];
+          {Object.keys(props.menu).filter(dayId => dayId > 3).map(dayId => {
+            let day = props.menu[dayId];
             return <DayOfWeek
-              name={day.name}
+              dayId={dayId}
+              name={day.dayName}
               meals={day.meals}
               key={dayId} />;
           })}
-          <Snacks snacks={snacks} />
+          <Snacks snacks={props.snacks} />
         </div>
       </div>
       <div className="row">
@@ -119,8 +61,16 @@ function Menu(props) {
 }
 
 Menu.propTypes = {
-  masterMenu: PropTypes.object,
+  menu: PropTypes.object,
+  snacks: PropTypes.string,
   dispatch: PropTypes.func
 };
 
-export default connect()(Menu);
+const mapStateToProps = (state) => {
+  return {
+    menu: state.menu,
+    snacks: state.snacks
+  };
+};
+
+export default connect(mapStateToProps)(Menu);

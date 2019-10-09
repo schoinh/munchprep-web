@@ -80,13 +80,6 @@ function setFirestoreListener(userId) {
         let dayId = daySnapshot.id;
         let dayName = daySnapshot.data().dayName;
         let mealsForDay = daySnapshot.data().meals;
-        console.log("daySnapshot.data(): ", menuForDay);
-        // menuRef.doc(dayId).collection("meals").orderBy("timestamp", "desc")
-        //   .onSnapshot(itemsCollectionSnapshot => {
-        //     let items = {};
-        //     itemsCollectionSnapshot.forEach(itemSnapshot => {
-        //       items[itemSnapshot.id] = itemSnapshot.data();
-        //     });
         dispatch(receiveMeals(dayId, dayName, mealsForDay));
       });
     });
@@ -116,7 +109,7 @@ function setFirestoreListener(userId) {
         });
       });
   };
-};
+}
 
 function receiveMeals(dayId, dayName, mealsFromFirebase) {
   return {
@@ -199,6 +192,14 @@ export function clearShoppingList() {
 //---------------------------------------//
 // MEAL PLANNING (MENU + SNACKS) ACTIONS //
 //---------------------------------------//
+
+export function updateMenu(mealKeyValue, dayId) {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const dayRef = db.collection("users").doc(userId).collection("menu").doc(dayId);
+    dayRef.update(mealKeyValue);
+  };
+}
 
 export function updateSnacks(snacksKeyValue) {
   return function () {

@@ -5,15 +5,15 @@ export default (state = initialState.menu, action) => {
   let newState;
 
   switch (action.type) {
-    case c.RECEIVE_MEALS:
-      newState = Object.assign({}, state);
-      newState[action.dayId] = {
-        dayName: action.dayName,
-        meals: action.meals
-      };
-      return newState;
+  case c.RECEIVE_MEALS:
+    newState = Object.assign({}, state);
+    newState[action.dayId] = {
+      dayName: action.dayName,
+      meals: action.meals
+    };
+    return newState;
 
-    default:
-      return state;
+  default:
+    return state;
   }
 };
