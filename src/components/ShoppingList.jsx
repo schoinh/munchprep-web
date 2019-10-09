@@ -7,8 +7,11 @@ import iconX from "../assets/images/icon-x.png";
 import iconSweep from "../assets/images/icon-sweep.png";
 import { connect } from "react-redux";
 import { clearShoppingList } from "./../actions";
+import { clearCheckedItems } from "./../actions";
 
 function ShoppingList(props) {
+  const { dispatch } = props;
+
   var iconXStyles = {
     width: "50px",
     marginTop: "30px",
@@ -18,12 +21,16 @@ function ShoppingList(props) {
   var iconSweepStyles = {
     width: "50px",
     marginTop: "30px",
-    float: "right"
+    float: "right",
+    cursor: "pointer"
   };
 
   const handleXClick = () => {
-    const { dispatch } = props;
     dispatch(clearShoppingList());
+  };
+
+  const handleSweepClick = () => {
+    dispatch(clearCheckedItems());
   };
 
   return (
@@ -40,7 +47,7 @@ function ShoppingList(props) {
         })}
       </CardGroup>
       <img src={iconX} onClick={handleXClick} style={iconXStyles} />
-      <img src={iconSweep} style={iconSweepStyles} />
+      <img src={iconSweep} onClick={handleSweepClick} style={iconSweepStyles} />
     </div>
   );
 }

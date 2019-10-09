@@ -187,7 +187,27 @@ export function clearShoppingList() {
         });
       });
   };
-}
+};
+
+// This is identical to clearShoppingList() except for the .where statement! Refactor
+export function clearCheckedItems() {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let categoryId = doc.id;
+          categoriesRef.doc(categoryId).collection("items").where("checked", "==", true).get()
+            .then(querySnapshot => {
+              querySnapshot.forEach(item => {
+                categoriesRef.doc(categoryId).collection("items").doc(item.id).delete();
+              });
+            });
+        });
+      });
+  };
+};
 
 //---------------------------------------//
 // MEAL PLANNING (MENU + SNACKS) ACTIONS //
