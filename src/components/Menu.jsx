@@ -8,7 +8,7 @@ import { clearMenu } from "./../actions";
 
 function Menu(props) {
   let menusByDay = {
-    1: {
+    0: {
       name: "Sunday",
       meals: {
         breakfast: "Scrambled eggs",
@@ -16,7 +16,7 @@ function Menu(props) {
         dinner: "Grilled salmon"
       }
     },
-    2: {
+    1: {
       name: "Monday",
       meals: {
         breakfast: "Frittata",
@@ -24,7 +24,7 @@ function Menu(props) {
         dinner: "Green curry"
       }
     },
-    3: {
+    2: {
       name: "Tuesday",
       meals: {
         breakfast: "Cereal",
@@ -32,7 +32,7 @@ function Menu(props) {
         dinner: "Takeout"
       }
     },
-    4: {
+    3: {
       name: "Wednesday",
       meals: {
         breakfast: "Scrambled eggs",
@@ -40,7 +40,7 @@ function Menu(props) {
         dinner: "Kalua pork"
       }
     },
-    5: {
+    4: {
       name: "Thursday",
       meals: {
         breakfast: "Cereal",
@@ -48,7 +48,7 @@ function Menu(props) {
         dinner: "Pizza"
       }
     },
-    6: {
+    5: {
       name: "Friday",
       meals: {
         breakfast: "Grits",
@@ -56,7 +56,7 @@ function Menu(props) {
         dinner: "Jerk chicken"
       }
     },
-    7: {
+    6: {
       name: "Saturday",
       meals: {
         breakfast: "Pancakes",
@@ -92,7 +92,7 @@ function Menu(props) {
     <div>
       <div className="row justify-content-center" style={menuStyles}>
         <div style={columnStyles}>
-          {Object.keys(menusByDay).filter(dayId => dayId < 5).map(dayId => {
+          {Object.keys(menusByDay).filter(dayId => dayId < 4).map(dayId => {
             let day = menusByDay[dayId];
             return <DayOfWeek
               name={day.name}
@@ -101,7 +101,7 @@ function Menu(props) {
           })}
         </div>
         <div style={columnStyles}>
-          {Object.keys(menusByDay).filter(dayId => dayId > 4).map(dayId => {
+          {Object.keys(menusByDay).filter(dayId => dayId > 3).map(dayId => {
             let day = menusByDay[dayId];
             return <DayOfWeek
               name={day.name}

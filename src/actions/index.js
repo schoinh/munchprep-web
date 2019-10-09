@@ -23,7 +23,7 @@ export function startFirebaseComm(userId, userName) {
       if (user.exists) {
         dispatch(setFirestoreListener(userId));
 
-        // If first-time login, set up default data and then set up Firestore listener
+        // If first-time login, set up default data in Firestore and then set up listener
       } else {
         const categoriesRef = db.collection("users").doc(userId).collection("categories");
         const defaultCategories = ["Produce", "Proteins", "Other Foods", "Non-Foods"];
@@ -37,14 +37,29 @@ export function startFirebaseComm(userId, userName) {
           });
         };
 
+        const menuRef = db.collection("users").doc(userId).collection("menu");
+        const defaultDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        const addDefaultDayNames = () => {
+          defaultDayNames.forEach(dayName => {
+            menuRef.doc(defaultDayNames.indexOf(dayName).toString()).set({
+              dayName: dayName,
+              meals: {
+                breakfast: "...",
+                lunch: "...",
+                dinner: "..."
+              }
+            });
+          });
+        };
+
         db.collection("users").doc(userId).set({
           name: userName,
           snacks: "..."
         })
+          .then(addDefaultDayNames())
           .then(addDefaultCategories())
-          .then(() => {
-            dispatch(setFirestoreListener(userId));
-          });
+          .then(dispatch(setFirestoreListener(userId)));
       }
     });
   };
