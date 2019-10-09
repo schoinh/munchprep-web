@@ -9,6 +9,10 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+//--------------------//
+// INITIATION ACTIONS //
+//--------------------//
+
 export function toggleAuth(newAuthStatus) {
   return {
     type: c.TOGGLE_AUTH,
@@ -23,7 +27,7 @@ export function startFirebaseComm(userId, userName) {
       if (user.exists) {
         dispatch(setFirestoreListener(userId));
 
-        // If first-time login, set up default data and then set up Firestore listener
+        // If first-time login, set up default data in Firestore and then set up listener
       } else {
         const categoriesRef = db.collection("users").doc(userId).collection("categories");
         const defaultCategories = ["Produce", "Proteins", "Other Foods", "Non-Foods"];
@@ -37,14 +41,29 @@ export function startFirebaseComm(userId, userName) {
           });
         };
 
+        const menuRef = db.collection("users").doc(userId).collection("menu");
+        const defaultDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        const addDefaultDayNames = () => {
+          defaultDayNames.forEach(dayName => {
+            menuRef.doc(defaultDayNames.indexOf(dayName).toString()).set({
+              dayName: dayName,
+              meals: {
+                breakfast: "...",
+                lunch: "...",
+                dinner: "..."
+              }
+            });
+          });
+        };
+
         db.collection("users").doc(userId).set({
           name: userName,
           snacks: "..."
         })
+          .then(addDefaultDayNames())
           .then(addDefaultCategories())
-          .then(() => {
-            dispatch(setFirestoreListener(userId));
-          });
+          .then(dispatch(setFirestoreListener(userId)));
       }
     });
   };
@@ -52,17 +71,33 @@ export function startFirebaseComm(userId, userName) {
 
 function setFirestoreListener(userId) {
   return function (dispatch) {
+
+    // Listen for menu updates
+    const menuRef = db.collection("users").doc(userId).collection("menu");
+    menuRef.onSnapshot(menuSnapshot => {
+      menuSnapshot.forEach(daySnapshot => {
+        console.log("daySnapshot:", daySnapshot);
+        let dayId = daySnapshot.id;
+        let dayName = daySnapshot.data().dayName;
+        let mealsForDay = daySnapshot.data().meals;
+        dispatch(receiveMeals(dayId, dayName, mealsForDay));
+      });
+    });
+
+    // Listen for snack updates
     db.collection("users").doc(userId).onSnapshot(userSnapshot => {
       let snacks = userSnapshot.data().snacks;
       dispatch(receiveSnacks(snacks));
     });
 
-    db.collection("users").doc(userId).collection("categories").orderBy("timestamp")
+    // Listen for shopping list updates
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.orderBy("timestamp")
       .onSnapshot(categoryCollectionSnapshot => {
         categoryCollectionSnapshot.forEach(categorySnapshot => {
           let categoryId = categorySnapshot.id;
           let category = categorySnapshot.data();
-          db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").orderBy("timestamp", "desc")
+          categoriesRef.doc(categoryId).collection("items").orderBy("timestamp", "desc")
             .onSnapshot(itemsCollectionSnapshot => {
               let items = {};
               itemsCollectionSnapshot.forEach(itemSnapshot => {
@@ -73,6 +108,15 @@ function setFirestoreListener(userId) {
             );
         });
       });
+  };
+}
+
+function receiveMeals(dayId, dayName, mealsFromFirebase) {
+  return {
+    type: c.RECEIVE_MEALS,
+    dayId: dayId,
+    dayName: dayName,
+    meals: mealsFromFirebase
   };
 }
 
@@ -92,10 +136,15 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
   };
 }
 
+//-----------------------//
+// SHOPPING LIST ACTIONS //
+//-----------------------//
+
 export function addGroceryItem(_name, _categoryId) {
   return function () {
     const userId = firebase.auth().currentUser.uid;
-    db.collection("users").doc(userId).collection("categories").doc(_categoryId).collection("items").add({
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.doc(_categoryId).collection("items").add({
       name: _name,
       checked: false,
       timestamp: Date.now()
@@ -124,18 +173,51 @@ export function toggleChecked(categoryId, itemId) {
 export function clearShoppingList() {
   return function () {
     const userId = firebase.auth().currentUser.uid;
-    db.collection("users").doc(userId).collection("categories").get()
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           let categoryId = doc.id;
-          db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").get()
+          categoriesRef.doc(categoryId).collection("items").get()
             .then(querySnapshot => {
               querySnapshot.forEach(item => {
-                db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(item.id).delete();
+                categoriesRef.doc(categoryId).collection("items").doc(item.id).delete();
               });
             });
         });
       });
+  };
+};
+
+// This is identical to clearShoppingList() except for the .where statement! Refactor
+export function clearCheckedItems() {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let categoryId = doc.id;
+          categoriesRef.doc(categoryId).collection("items").where("checked", "==", true).get()
+            .then(querySnapshot => {
+              querySnapshot.forEach(item => {
+                categoriesRef.doc(categoryId).collection("items").doc(item.id).delete();
+              });
+            });
+        });
+      });
+  };
+};
+
+//---------------------------------------//
+// MEAL PLANNING (MENU + SNACKS) ACTIONS //
+//---------------------------------------//
+
+export function updateMenu(mealKeyValue, dayId) {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const dayRef = db.collection("users").doc(userId).collection("menu").doc(dayId);
+    dayRef.update(mealKeyValue);
   };
 }
 
@@ -143,5 +225,28 @@ export function updateSnacks(snacksKeyValue) {
   return function () {
     const userId = firebase.auth().currentUser.uid;
     db.collection("users").doc(userId).update(snacksKeyValue);
+  };
+}
+
+export function clearMenu() {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const menuRef = db.collection("users").doc(userId).collection("menu");
+
+    menuRef.get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let dayId = doc.id;
+          menuRef.doc(dayId).update({
+            "meals.breakfast": "...",
+            "meals.lunch": "...",
+            "meals.dinner": "..."
+          });
+        });
+      });
+
+    db.collection("users").doc(userId).update({
+      "snacks": "..."
+    });
   };
 }

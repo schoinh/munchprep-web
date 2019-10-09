@@ -17,7 +17,7 @@ function GroceryItem(props) {
           {props.name}
         </label>
       </div>
-      <span>x</span>
+      {/* <span onClick={() => { alert("Edit and Delete functionality for individual items are coming soon!") }}>x</span> */}
     </div>
   );
 }

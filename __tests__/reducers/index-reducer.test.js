@@ -12,7 +12,7 @@ describe("rootReducer", () => {
     expect(rootReducer({}, { type: null })).toEqual({
       isAuthenticated: false,
       shoppingList: {},
-      snacks: "",
+      snacks: "...",
       menu: {}
     });
   });
