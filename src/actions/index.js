@@ -9,14 +9,10 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-export function addItem(_name, _categoryId) {
-  return function () {
-    const userId = firebase.auth().currentUser.uid;
-    db.collection("users").doc(userId).collection("categories").doc(_categoryId).collection("items").add({
-      name: _name,
-      checked: false,
-      timestamp: Date.now()
-    });
+export function toggleAuth(newAuthStatus) {
+  return {
+    type: c.TOGGLE_AUTH,
+    newAuthStatus: newAuthStatus
   };
 }
 
@@ -92,7 +88,7 @@ function setFirebaseListener(userId) {
 function receiveSnacks(snacksFromFirebase) {
   return {
     type: c.RECEIVE_SNACKS,
-    newSnacks: snacksFromFirebase
+    snacks: snacksFromFirebase
   };
 }
 
@@ -102,6 +98,17 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
     categoryId: categoryIdFromFirebase,
     category: categoryFromFirebase,
     items: itemsFromFirebase
+  };
+}
+
+export function addGroceryItem(_name, _categoryId) {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    db.collection("users").doc(userId).collection("categories").doc(_categoryId).collection("items").add({
+      name: _name,
+      checked: false,
+      timestamp: Date.now()
+    });
   };
 }
 
@@ -141,9 +148,9 @@ export function clearShoppingList() {
   };
 }
 
-export function toggleAuth(newAuthStatus) {
-  return {
-    type: c.TOGGLE_AUTH,
-    newAuthStatus: newAuthStatus
+export function updateSnacks(snacksKeyValue) {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    db.collection("users").doc(userId).update(snacksKeyValue);
   };
 }

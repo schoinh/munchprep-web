@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { RIETextArea } from "@attently/riek";
-import firebase from "firebase/app";
+import { updateSnacks } from "../actions";
 
 function Snacks(props) {
   var SnacksStyles = {
@@ -17,8 +17,9 @@ function Snacks(props) {
     backgroundColor: "#5ce1e6"
   };
 
-  function handleSnacksEdit(userId) {
-    console.log(userId + "handleSnacksEdit has been called");
+  function handleSnacksEdit(snacksKeyValue) {
+    const { dispatch } = props;
+    dispatch(updateSnacks(snacksKeyValue));
   }
 
   return (
@@ -30,7 +31,7 @@ function Snacks(props) {
         <RIETextArea
           value={props.snacks}
           change={handleSnacksEdit}
-          propName={firebase.auth().currentUser.uid} /><br />
+          propName="snacks" /><br />
       </div>
     </div>
   );
@@ -44,7 +45,7 @@ Snacks.propTypes = {
 const mapStateToProps = (state) => {
   return {
     snacks: state.snacks
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(Snacks);

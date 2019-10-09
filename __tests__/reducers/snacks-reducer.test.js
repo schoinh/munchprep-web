@@ -12,7 +12,7 @@ describe("snacksReducer", () => {
   test("Should update snacks when snacks are changed", () => {
     action = {
       type: c.RECEIVE_SNACKS,
-      newSnacks: "Tomatoes"
+      snacks: "Tomatoes"
     };
 
     expect(snacksReducer(initialState.snacks, action)).toEqual("Tomatoes");
