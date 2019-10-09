@@ -20,7 +20,8 @@ function UserPage(props) {
   };
 
   var settingsStyles = {
-    marginRight: "1em"
+    marginRight: "1em",
+    cursor: "pointer"
   };
 
   return (
@@ -35,7 +36,7 @@ function UserPage(props) {
         <div>
           <ul className="navbar-nav" style={linkStyles}>
             <li style={settingsStyles} className="nav-item">
-              <a className="nav-link">Settings</a>
+              <a className="nav-link" onClick={() => { alert("App customization is coming soon!") }}> Settings</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" onClick={() => { firebase.auth().signOut(); }} href="/">Log Out</a>
