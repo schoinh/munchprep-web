@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { RIEInput } from "@attently/riek";
 
 function DayOfWeek(props) {
   var dayOfWeekStyles = {
@@ -9,15 +11,28 @@ function DayOfWeek(props) {
     marginRight: "auto"
   };
 
+  function handleMealEdit(mealId) {
+    console.log(mealId + "handleMealEdit has been called");
+  }
+
   return (
     <div style={dayOfWeekStyles} className="card">
       <div className="card-header">
         {props.name}
       </div>
       <div className="card-body">
-        {props.meals.breakfast}<br />
-        {props.meals.lunch}<br />
-        {props.meals.dinner}
+        <RIEInput
+          value={props.meals.breakfast}
+          change={handleMealEdit}
+          propName="some kind of uid (and meal name?)" /><br />
+        <RIEInput
+          value={props.meals.lunch}
+          change={handleMealEdit}
+          propName="some kind of uid (and meal name?)" /><br />
+        <RIEInput
+          value={props.meals.dinner}
+          change={handleMealEdit}
+          propName="some kind of uid (and meal name?)" />
       </div>
     </div>
   );
@@ -28,4 +43,4 @@ DayOfWeek.propTypes = {
   meals: PropTypes.object
 };
 
-export default DayOfWeek;
+export default connect()(DayOfWeek);

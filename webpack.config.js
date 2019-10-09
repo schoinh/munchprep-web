@@ -86,6 +86,7 @@ module.exports = {
       template: "template.ejs",
       appMountId: "react-app-root",
       title: "MunchPrep",
+      favicon: "./src/assets/images/favicon.png",
       filename: resolve(__dirname, "build", "index.html"),
     }),
   ]

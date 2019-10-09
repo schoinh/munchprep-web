@@ -6,7 +6,7 @@ describe("authReducer", () => {
   let action;
 
   test("Should return default state if no action type is recognized", () => {
-    expect(authReducer({}, { type: null })).toEqual({});
+    expect(authReducer(initialState.isAuthenticated, { type: null })).toEqual(false);
   });
 
   test("Should change state to signed in when user signs in", () => {

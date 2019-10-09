@@ -1,3 +1,4 @@
 export const initialState = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  snacks: ""
 };
