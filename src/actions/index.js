@@ -8,6 +8,7 @@ firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
 const db = firebase.firestore();
+const batch = db.batch();
 
 //--------------------//
 // INITIATION ACTIONS //
@@ -201,7 +202,10 @@ export function clearCheckedItems() {
           categoriesRef.doc(categoryId).collection("items").where("checked", "==", true).get()
             .then(querySnapshot => {
               querySnapshot.forEach(item => {
-                categoriesRef.doc(categoryId).collection("items").doc(item.id).delete();
+                console.log("item.ref:", item.ref)
+                batch.delete(item.ref);
+                batch.commit();
+                // batch.delete(categoriesRef.doc(categoryId).collection("items").doc(item.id));
               });
             });
         });
