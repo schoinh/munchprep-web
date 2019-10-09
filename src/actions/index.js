@@ -19,47 +19,38 @@ export function toggleAuth(newAuthStatus) {
 export function startFirebaseComm(userId, userName) {
   return function (dispatch) {
     db.collection("users").doc(userId).get().then((user) => {
+      // If existing user, set up Firestore listener
       if (user.exists) {
-        dispatch(setFirebaseListener(userId));
+        dispatch(setFirestoreListener(userId));
+
+        // If first-time login, set up default data and then set up Firestore listener
       } else {
-        var collectionRef = db.collection("users").doc(userId).collection("categories");
+        const categoriesRef = db.collection("users").doc(userId).collection("categories");
+        const defaultCategories = ["Produce", "Proteins", "Other Foods", "Non-Foods"];
+
+        const addDefaultCategories = () => {
+          defaultCategories.forEach(category => {
+            categoriesRef.add({
+              name: category,
+              timestamp: Date.now() + defaultCategories.indexOf(category)
+            });
+          });
+        };
+
         db.collection("users").doc(userId).set({
           name: userName,
-          snacks: ""
+          snacks: "..."
         })
+          .then(addDefaultCategories())
           .then(() => {
-            collectionRef.add({
-              name: "Produce",
-              timestamp: Date.now()
-            });
-          })
-          .then(() => {
-            collectionRef.add({
-              name: "Proteins",
-              timestamp: Date.now() + 1
-            });
-          })
-          .then(() => {
-            collectionRef.add({
-              name: "Other Foods",
-              timestamp: Date.now() + 2
-            });
-          })
-          .then(() => {
-            collectionRef.add({
-              name: "Non-Foods",
-              timestamp: Date.now() + 3
-            });
-          })
-          .then(() => {
-            dispatch(setFirebaseListener(userId));
+            dispatch(setFirestoreListener(userId));
           });
       }
     });
   };
 }
 
-function setFirebaseListener(userId) {
+function setFirestoreListener(userId) {
   return function (dispatch) {
     db.collection("users").doc(userId).onSnapshot(userSnapshot => {
       let snacks = userSnapshot.data().snacks;

@@ -30,8 +30,8 @@ function ShoppingList(props) {
     <div>
       <NewItemForm />
       <CardGroup>
-        {Object.keys(props.masterShoppingList).map(categoryId => {
-          let category = props.masterShoppingList[categoryId];
+        {Object.keys(props.shoppingList).map(categoryId => {
+          let category = props.shoppingList[categoryId];
           return <Category
             name={category.name}
             items={category.items}
@@ -46,7 +46,7 @@ function ShoppingList(props) {
 }
 
 ShoppingList.propTypes = {
-  masterShoppingList: PropTypes.object,
+  shoppingList: PropTypes.object,
   dispatch: PropTypes.func
 };
 
