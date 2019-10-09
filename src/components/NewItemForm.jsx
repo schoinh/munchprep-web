@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
-import { addItem } from "./../actions";
+import { addGroceryItem } from "./../actions";
 import PropTypes from "prop-types";
 
 function NewItemForm(props) {
@@ -28,7 +28,7 @@ function NewItemForm(props) {
 
   function handleNewItemFormSubmit(event) {
     if (_name.value) {
-      dispatch(addItem(_name.value, event.target.value));
+      dispatch(addGroceryItem(_name.value, event.target.value));
       _name.value = "";
     }
   }
