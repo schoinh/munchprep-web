@@ -42,8 +42,8 @@ function NewItemForm(props) {
         ref={(input) => { _name = input; }} />
       <div className="d-flex flex-column">
         <ButtonGroup style={buttonStyle}>
-          {Object.keys(props.masterShoppingList).map(categoryId => {
-            let category = props.masterShoppingList[categoryId];
+          {Object.keys(props.shoppingList).map(categoryId => {
+            let category = props.shoppingList[categoryId];
             return <Button
               variant="secondary"
               onClick={handleNewItemFormSubmit}
@@ -57,13 +57,13 @@ function NewItemForm(props) {
 }
 
 NewItemForm.propTypes = {
-  masterShoppingList: PropTypes.object,
+  shoppingList: PropTypes.object,
   dispatch: PropTypes.func
 };
 
 const mapStateToProps = (state) => {
   return {
-    masterShoppingList: state.masterShoppingList
+    shoppingList: state.shoppingList
   };
 };
 

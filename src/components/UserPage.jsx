@@ -44,19 +44,19 @@ function UserPage(props) {
         </div>
       </nav>
       <div className="container">
-        <UserTabs masterShoppingList={props.masterShoppingList} />
+        <UserTabs shoppingList={props.shoppingList} />
       </div>
     </div>
   );
 }
 
 UserPage.propTypes = {
-  masterShoppingList: PropTypes.object
+  shoppingList: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
   return {
-    masterShoppingList: state.masterShoppingList
+    shoppingList: state.shoppingList
   };
 };
 

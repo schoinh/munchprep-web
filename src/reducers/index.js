@@ -5,7 +5,7 @@ import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   isAuthenticated: authReducer,
-  masterShoppingList: shoppingListReducer,
+  shoppingList: shoppingListReducer,
   snacks: snacksReducer
 });
 

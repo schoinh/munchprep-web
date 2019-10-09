@@ -16,14 +16,14 @@ function UserTabs(props) {
         <Menu />
       </Tab>
       <Tab eventKey="shoppingList" title="Shopping List">
-        <ShoppingList masterShoppingList={props.masterShoppingList} />
+        <ShoppingList shoppingList={props.shoppingList} />
       </Tab>
     </Tabs>
   );
 }
 
 UserTabs.propTypes = {
-  masterShoppingList: PropTypes.object
+  shoppingList: PropTypes.object
 };
 
 export default UserTabs;
