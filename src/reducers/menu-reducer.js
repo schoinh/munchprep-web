@@ -2,11 +2,18 @@ import constants from "./../constants";
 const { c, initialState } = constants;
 
 export default (state = initialState.menu, action) => {
-  switch (action.type) {
-  // case c.RECEIVE_SNACKS:
-  //   return action.menu;
+  let newState;
 
-  default:
-    return state;
+  switch (action.type) {
+    case c.RECEIVE_MEALS:
+      newState = Object.assign({}, state);
+      newState[action.dayId] = {
+        dayName: action.dayName,
+        meals: action.meals
+      };
+      return newState;
+
+    default:
+      return state;
   }
 };
