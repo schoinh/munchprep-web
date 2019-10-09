@@ -207,3 +207,26 @@ export function updateSnacks(snacksKeyValue) {
     db.collection("users").doc(userId).update(snacksKeyValue);
   };
 }
+
+export function clearMenu() {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const menuRef = db.collection("users").doc(userId).collection("menu");
+
+    menuRef.get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          let dayId = doc.id;
+          menuRef.doc(dayId).update({
+            "meals.breakfast": "...",
+            "meals.lunch": "...",
+            "meals.dinner": "..."
+          });
+        });
+      });
+
+    db.collection("users").doc(userId).update({
+      "snacks": "..."
+    });
+  };
+}
