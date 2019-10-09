@@ -72,12 +72,13 @@ function setFirestoreListener(userId) {
       dispatch(receiveSnacks(snacks));
     });
 
-    db.collection("users").doc(userId).collection("categories").orderBy("timestamp")
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.orderBy("timestamp")
       .onSnapshot(categoryCollectionSnapshot => {
         categoryCollectionSnapshot.forEach(categorySnapshot => {
           let categoryId = categorySnapshot.id;
           let category = categorySnapshot.data();
-          db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").orderBy("timestamp", "desc")
+          categoriesRef.doc(categoryId).collection("items").orderBy("timestamp", "desc")
             .onSnapshot(itemsCollectionSnapshot => {
               let items = {};
               itemsCollectionSnapshot.forEach(itemSnapshot => {
@@ -110,7 +111,8 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
 export function addGroceryItem(_name, _categoryId) {
   return function () {
     const userId = firebase.auth().currentUser.uid;
-    db.collection("users").doc(userId).collection("categories").doc(_categoryId).collection("items").add({
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.doc(_categoryId).collection("items").add({
       name: _name,
       checked: false,
       timestamp: Date.now()
@@ -139,14 +141,15 @@ export function toggleChecked(categoryId, itemId) {
 export function clearShoppingList() {
   return function () {
     const userId = firebase.auth().currentUser.uid;
-    db.collection("users").doc(userId).collection("categories").get()
+    const categoriesRef = db.collection("users").doc(userId).collection("categories");
+    categoriesRef.get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
           let categoryId = doc.id;
-          db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").get()
+          categoriesRef.doc(categoryId).collection("items").get()
             .then(querySnapshot => {
               querySnapshot.forEach(item => {
-                db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(item.id).delete();
+                categoriesRef.doc(categoryId).collection("items").doc(item.id).delete();
               });
             });
         });
