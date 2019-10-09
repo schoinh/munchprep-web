@@ -9,6 +9,10 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+//--------------------//
+// INITIATION ACTIONS //
+//--------------------//
+
 export function toggleAuth(newAuthStatus) {
   return {
     type: c.TOGGLE_AUTH,
@@ -108,6 +112,10 @@ function receiveCategory(categoryIdFromFirebase, categoryFromFirebase, itemsFrom
   };
 }
 
+//-----------------------//
+// SHOPPING LIST ACTIONS //
+//-----------------------//
+
 export function addGroceryItem(_name, _categoryId) {
   return function () {
     const userId = firebase.auth().currentUser.uid;
@@ -156,6 +164,10 @@ export function clearShoppingList() {
       });
   };
 }
+
+//------------------------------//
+// MEAL PLANNING (MENU) ACTIONS //
+//------------------------------//
 
 export function updateSnacks(snacksKeyValue) {
   return function () {
