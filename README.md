@@ -1,6 +1,6 @@
 <img src="./src/assets/images/Logo.png" alt="MunchPrep Logo" width="250"/>
 
-### http://www.munchprep.net
+### http://munchprep.web.app
 
 #### _A meal planning and grocery list app - September 20, 2019_
 
