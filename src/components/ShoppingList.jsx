@@ -14,7 +14,6 @@ function ShoppingList(props) {
 
   var iconXStyles = {
     width: "50px",
-    height: "50px",
     marginTop: "30px",
     cursor: "pointer"
   };

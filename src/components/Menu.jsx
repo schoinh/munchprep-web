@@ -18,6 +18,7 @@ function Menu(props) {
 
   var iconXStyles = {
     width: "50px",
+    height: "50px",
     marginTop: "30px",
     float: "left",
     cursor: "pointer"
