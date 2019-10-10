@@ -43,7 +43,8 @@ function DayOfWeek(props) {
 DayOfWeek.propTypes = {
   name: PropTypes.string,
   meals: PropTypes.object,
-  dayId: PropTypes.string
+  dayId: PropTypes.string,
+  dispatch: PropTypes.func
 };
 
 export default connect()(DayOfWeek);

@@ -76,7 +76,6 @@ function setFirestoreListener(userId) {
     const menuRef = db.collection("users").doc(userId).collection("menu");
     menuRef.onSnapshot(menuSnapshot => {
       menuSnapshot.forEach(daySnapshot => {
-        console.log("daySnapshot:", daySnapshot);
         let dayId = daySnapshot.id;
         let dayName = daySnapshot.data().dayName;
         let mealsForDay = daySnapshot.data().meals;
@@ -187,7 +186,7 @@ export function clearShoppingList() {
         });
       });
   };
-};
+}
 
 // This is identical to clearShoppingList() except for the .where statement! Refactor
 export function clearCheckedItems() {
@@ -207,7 +206,7 @@ export function clearCheckedItems() {
         });
       });
   };
-};
+}
 
 //---------------------------------------//
 // MEAL PLANNING (MENU + SNACKS) ACTIONS //
