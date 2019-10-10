@@ -1,6 +1,6 @@
 <img src="./src/assets/images/Logo.png" alt="MunchPrep Logo" width="250"/>
 
-### http://munchprep.web.app
+### http://www.munchprep.net
 
 #### _A meal planning and grocery list app - October 10, 2019_
 
@@ -46,7 +46,7 @@ Mock-ups, a React component diagram, and other design documents are included in 
 
 1. Clone this repository:
     ```
-    $ git clone https://github.com/schoinh/MunchPrep.git
+    $ git clone https://github.com/schoinh/munchprep-web.git
     ```
 2. Install dependencies:
     ```
