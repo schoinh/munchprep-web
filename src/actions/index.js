@@ -165,7 +165,20 @@ export function toggleChecked(categoryId, itemId) {
           "checked": true
         });
       }
-    });
+    })
+      .then(() => {
+        itemRef.get().then(item => {
+          console.log("item before updateGroceryItem:", item.data());
+        });
+      })
+      .then(updateGroceryItem(userId, categoryId, itemId));
+  };
+}
+
+function updateGroceryItem(userId, categoryId, itemId) {
+  return function () {
+    const itemRef = db.collection("users").doc(userId).collection("categories").doc(categoryId).collection("items").doc(itemId);
+    itemRef.get().then(result => console.log(result.data()));
   };
 }
 
