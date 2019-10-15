@@ -23,13 +23,13 @@ Currently, only default settings are available:
 Mock-ups, a React component diagram, and other design documents are included in `Design-Docs.md`.
 
 ## Future Features
+* A more intuitive UI for adding new Menu items
 * Individual editing and deleting of shopping list items
 * A Settings page where each user can customize the starting day of the week for the Menu and the grocery store sections for the shopping list
 * Color themes
 * A native iOS app!
 
 ## Known Bugs
-* State changes start malfunctioning when the number of checked-off grocery items exceeds 25. Temporary workaround: refresh the page.
 * Inline editing stops working if user saves a blank meal by erasing a field completely and hitting enter or clicking outside of the text input box. Temporary workaround: refresh the page.
 
 ## Technologies Used
