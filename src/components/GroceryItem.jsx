@@ -11,8 +11,8 @@ function GroceryItem(props) {
 
   return (
     <div className="d-flex justify-content-between">
-      <div className="form-check" onClick={handleItemClick}>
-        <input className="form-check-input" type="checkbox" id={props.itemId} defaultChecked={props.checked} />
+      <div className="form-check">
+        <input className="form-check-input" type="checkbox" id={props.itemId} defaultChecked={props.checked} onClick={handleItemClick} />
         <label className="form-check-label" htmlFor={props.itemId}>
           {props.name}
         </label>
