@@ -34,4 +34,49 @@ describe("shoppingListReducer", () => {
       }
     });
   });
+
+  test("Should update an item's checked status when received from Firebase", () => {
+    const shoppingList = {
+      1234: {
+        name: "Produce",
+        items: {
+          4321: {
+            checked: false,
+            name: "bananas",
+            timestamp: 1570655483258
+          },
+          1111: {
+            checked: false,
+            name: "potatoes",
+            timestamp: 1837283718172
+          }
+        }
+      }
+    };
+
+    action = {
+      type: c.RECEIVE_ITEM,
+      categoryId: "1234",
+      itemId: "4321",
+      checked: true
+    };
+
+    expect(shoppingListReducer(shoppingList, action)).toEqual({
+      1234: {
+        name: "Produce",
+        items: {
+          4321: {
+            checked: true,
+            name: "bananas",
+            timestamp: 1570655483258
+          },
+          1111: {
+            checked: false,
+            name: "potatoes",
+            timestamp: 1837283718172
+          }
+        }
+      }
+    });
+  });
 });
