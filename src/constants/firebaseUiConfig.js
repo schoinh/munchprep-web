@@ -25,11 +25,9 @@ var firebaseUiConfig = {
         prompt: "select_account"
       }
     }
-  ],
-  // Terms of service url.
-  // tosUrl: '<your-tos-url>',
-  // // Privacy policy url.
-  // privacyPolicyUrl: '<your-privacy-policy-url>'
+  ]
+  // tosUrl: "/#/terms",
+  // privacyPolicyUrl: "/#/privacy"
 };
 
 export default firebaseUiConfig;
