@@ -6,7 +6,7 @@ describe("snacksReducer", () => {
   let action;
 
   test("Should return default state if no action type is recognized", () => {
-    expect(snacksReducer(initialState.snacks, { type: null })).toEqual("...");
+    expect(snacksReducer(initialState.snacks, { type: null })).toEqual("_________________________");
   });
 
   test("Should update snacks when snacks are changed in database", () => {

@@ -49,9 +49,9 @@ export function startFirebaseComm(userId, userName) {
             menuRef.doc(defaultDayNames.indexOf(dayName).toString()).set({
               dayName: dayName,
               meals: {
-                breakfast: "...",
-                lunch: "...",
-                dinner: "..."
+                breakfast: "______________________________",
+                lunch: "______________________________",
+                dinner: "______________________________"
               }
             });
           });
@@ -59,7 +59,7 @@ export function startFirebaseComm(userId, userName) {
 
         db.collection("users").doc(userId).set({
           name: userName,
-          snacks: "..."
+          snacks: "_________________________"
         })
           .then(addDefaultDayNames())
           .then(addDefaultCategories())
@@ -237,15 +237,15 @@ export function clearMenu() {
         querySnapshot.forEach(doc => {
           let dayId = doc.id;
           menuRef.doc(dayId).update({
-            "meals.breakfast": "...",
-            "meals.lunch": "...",
-            "meals.dinner": "..."
+            "meals.breakfast": "______________________________",
+            "meals.lunch": "______________________________",
+            "meals.dinner": "______________________________"
           });
         });
       });
 
     db.collection("users").doc(userId).update({
-      "snacks": "..."
+      "snacks": "_________________________"
     });
   };
 }

@@ -1,6 +1,6 @@
 export const initialState = {
   isAuthenticated: false,
   menu: {},
-  snacks: "...",
+  snacks: "_________________________",
   shoppingList: {}
 };

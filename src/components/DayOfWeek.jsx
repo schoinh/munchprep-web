@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { RIEInput } from "@attently/riek";
 import { updateMenu } from "../actions";
+import Badge from "react-bootstrap/Badge";
 
 function DayOfWeek(props) {
   var dayOfWeekStyles = {
@@ -23,15 +24,15 @@ function DayOfWeek(props) {
         {props.name}
       </div>
       <div className="card-body">
-        <RIEInput
+        <Badge variant="light">B</Badge> <RIEInput
           value={props.meals.breakfast}
           change={handleMealEdit}
           propName="meals.breakfast" /><br />
-        <RIEInput
+        <Badge variant="light">L</Badge> <RIEInput
           value={props.meals.lunch}
           change={handleMealEdit}
           propName="meals.lunch" /><br />
-        <RIEInput
+        <Badge variant="light">D</Badge> <RIEInput
           value={props.meals.dinner}
           change={handleMealEdit}
           propName="meals.dinner" />
