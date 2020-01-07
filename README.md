@@ -2,9 +2,11 @@
 
 ### http://www.munchprep.net
 
-#### _A meal planning and grocery list app - October 10, 2019_
-
+#### _A meal planning and grocery list app_
 #### _By **Na Hyung Choi**_
+#### _Latest Update: January 7, 2020_ - Improved routing to support authentication persistence, i.e., user remains logged in unless explicitly signed out
+#### _Initial release: October 10, 2019_
+
 
 ## Description
 MunchPrep allows you to plan out a week's worth of meals and make a grocery shopping list in one convenient app.
@@ -58,12 +60,25 @@ Mock-ups, a React component diagram, and other design documents are included in 
     ```
 4. Navigate in your browser (Chrome recommended) to http://localhost:8080
 
-## Support and contact details
+## Deploy Changes
+
+1. Merge to `master`
+2. Add the following line to `webpack.config.js` (s first item in `module.exports`):
+    ```
+    mode: "production",
+    ```
+3. Build distribution files and deploy to Firebase:
+    ```
+    $ npm run build
+    $ firebase deploy 
+    ```
+
+## Support and Contact Details
 
 _Please email Na Hyung with questions and comments. Pull requests are welcome!_
 
-### License
+## License
 
-*GNU GPLv3*
+_GNU GPLv3_
 
-Copyright (c) 2019 **_Na Hyung Choi_**
+Copyright (c) 2020 **_Na Hyung Choi_**
