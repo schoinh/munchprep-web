@@ -21,7 +21,7 @@ function Error404() {
       <img style={logoStyles} src={logo} />
       <div style={textStyles}>
         <h2>Uh oh... This page does not exist!</h2>
-        <h3><Link to="/">Return Home</Link></h3>
+        <h3><Link to="/">Back to MunchPrep</Link></h3>
       </div>
     </div>
   );
