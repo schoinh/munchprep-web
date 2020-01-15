@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
+  mode: "production",
+
   entry: [
     "react-hot-loader/patch",
     "webpack-dev-server/client?http://localhost:8080",
