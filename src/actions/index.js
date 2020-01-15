@@ -249,3 +249,14 @@ export function clearMenu() {
     });
   };
 }
+
+// ---------------- //
+// SETTINGS ACTIONS //
+// ---------------- //
+
+export function toggleSettingsView(newStatus) {
+  return {
+    type: c.TOGGLE_SETTINGS_VIEW,
+    newStatus: newStatus
+  };
+}
