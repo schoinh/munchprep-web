@@ -22,7 +22,7 @@ Currently, only default settings are available:
 * The grocery store sections are Produce, Proteins, Other Foods, and Non-Foods.
 
 ## Design Documents
-Mock-ups, a React component diagram, and other design documents are included in `Design-Docs.md`.
+Mock-ups, a React component diagram, and other design documents are included in [Design Docs](Design-Docs.md). Check them out!
 
 ## Future Features
 * A more intuitive UI for adding new Menu items
