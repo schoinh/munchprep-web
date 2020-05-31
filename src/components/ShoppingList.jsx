@@ -26,7 +26,9 @@ function ShoppingList(props) {
   };
 
   const handleXClick = () => {
-    dispatch(clearShoppingList());
+    if (window.confirm("Are you sure you want to DELETE everything on this shopping list?")) {
+      dispatch(clearShoppingList());
+    }
   };
 
   const handleSweepClick = () => {

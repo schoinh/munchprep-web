@@ -4,7 +4,7 @@
 
 #### _A meal planning and grocery list app_
 #### _By **Na Hyung Choi**_
-#### _Latest Update: January 7, 2020_ - Improved routing to support authentication persistence, i.e., user remains logged in unless explicitly signed out
+#### _Latest Update: May 30, 2020_ - Show a confirmation when the user clicks the delete icon
 #### _Initial release: October 10, 2019_
 
 

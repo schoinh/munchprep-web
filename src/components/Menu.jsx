@@ -26,7 +26,9 @@ function Menu(props) {
 
   const handleXClick = () => {
     const { dispatch } = props;
-    dispatch(clearMenu());
+    if (window.confirm("Are you sure you want to delete everything on this menu?")) {
+      dispatch(clearMenu());
+    }
   };
 
   return (
