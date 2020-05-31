@@ -1,6 +1,6 @@
 <img src="./src/assets/images/Logo.png" alt="MunchPrep Logo" width="250"/>
 
-### http://www.munchprep.net
+# MunchPrep - [munchprep.net](https://munchprep.net)
 
 #### _A meal planning and grocery list app_
 #### _By **Na Hyung Choi**_
