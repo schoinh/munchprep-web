@@ -1,10 +1,13 @@
-import React from "react";
-import logo from "../assets/images/LogoSmall.png";
-import UserTabs from "./UserTabs";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import firebase from "firebase/app";
 import "firebase/auth";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import logo from "../assets/images/LogoSmall.png";
+
+import UserTabs from "./UserTabs";
+import Settings from "./Settings";
 
 function UserPage(props) {
   var navBarStyles = {
@@ -25,6 +28,8 @@ function UserPage(props) {
     cursor: "pointer"
   };
 
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light" style={navBarStyles}>
@@ -37,7 +42,7 @@ function UserPage(props) {
         <div>
           <ul className="navbar-nav" style={linkStyles}>
             <li style={settingsStyles} className="nav-item">
-              <a className="nav-link" onClick={() => { alert("App customization is coming soon!"); }}> Settings</a>
+              <a className="nav-link" onClick={() => setShowModal(true)}> Settings</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" onClick={() => { firebase.auth().signOut(); }} href="/">Log Out</a>
@@ -47,6 +52,7 @@ function UserPage(props) {
       </nav>
       <div className="container">
         <UserTabs shoppingList={props.shoppingList} />
+        <Settings isVisible={showModal} handleClose={() => setShowModal(false)}/>
       </div>
     </div>
   );
