@@ -4,6 +4,7 @@ import UserTabs from "./UserTabs";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import firebase from "firebase/app";
+import "firebase/auth";
 
 function UserPage(props) {
   var navBarStyles = {

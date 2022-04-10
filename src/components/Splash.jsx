@@ -1,7 +1,8 @@
 import React from "react";
 import logo from "../assets/images/Logo.png";
 import github from "../assets/images/GitHub_Logo.png";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import uiConfig from "../constants/firebaseUiConfig";
 
