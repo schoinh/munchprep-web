@@ -2,6 +2,7 @@ import rootReducer from "./../../src/reducers/index";
 import shoppingListReducer from "./../../src/reducers/shopping-list-reducer";
 import authReducer from "./../../src/reducers/auth-reducer";
 import snacksReducer from "./../../src/reducers/snacks-reducer";
+import settingsReducer from "../../src/reducers/settings-reducer";
 import { createStore } from "redux";
 
 let store = createStore(rootReducer);
@@ -13,7 +14,8 @@ describe("rootReducer", () => {
       isAuthenticated: false,
       shoppingList: {},
       snacks: "_________________________",
-      menu: {}
+      menu: {},
+      settings: {}
     });
   });
 
@@ -27,5 +29,9 @@ describe("rootReducer", () => {
 
   test("Should contain snacksReducer logic", () => {
     expect(store.getState().snacks).toEqual(snacksReducer(undefined, { type: null }));
+  });
+
+  test("Should contain settingsReducer logic", () => {
+    expect(store.getState().snacks).toEqual(settingsReducer(undefined, { type: null }));
   });
 });
