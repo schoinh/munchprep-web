@@ -1,5 +1,5 @@
 .DS_STORE
-.firebase
+.firebase/
 node_modules
 build
 src/constants/apiKey.js
