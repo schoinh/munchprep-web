@@ -12,14 +12,16 @@ function Category(props) {
       <div className="card-body">
         <Form>
           {Object.keys(props.items)
-            .map(itemId =>
-              <GroceryItem
+            .map(itemId => {
+              // if (props.autoAdd) return <div>AutoAddItem</div>;
+              return <GroceryItem
                 key={itemId}
                 itemId={itemId}
                 categoryId={props.id}
                 name={props.items[itemId].name}
-                checked={props.items[itemId].checked} />
-            )
+                checked={props.items[itemId].checked}
+              />;
+            })
           }
         </Form>
       </div>
@@ -30,7 +32,8 @@ function Category(props) {
 Category.propTypes = {
   name: PropTypes.string,
   items: PropTypes.object,
-  id: PropTypes.string
+  id: PropTypes.string,
+  // autoAdd: PropTypes.bool
 };
 
 export default Category;

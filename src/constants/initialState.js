@@ -3,5 +3,7 @@ export const initialState = {
   menu: {},
   snacks: "_________________________",
   shoppingList: {},
-  settings: {}
+  settings: {
+    autoAdd: {}
+  }
 };

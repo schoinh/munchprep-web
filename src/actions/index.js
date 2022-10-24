@@ -31,19 +31,18 @@ export function startFirebaseComm(userId, userName) {
       } else {
         const categoriesRef = db.collection("users").doc(userId).collection("categories");
         const defaultCategories = ["Produce", "Proteins", "Other Foods", "Non-Foods"];
-
         const addDefaultCategories = () => {
           defaultCategories.forEach(category => {
             categoriesRef.add({
               name: category,
-              timestamp: Date.now() + defaultCategories.indexOf(category)
+              // Timestamp is used to preserve the order of the categories for display purposes
+              timestamp: Date.now() + defaultCategories.indexOf(category) * 1000
             });
           });
         };
 
         const menuRef = db.collection("users").doc(userId).collection("menu");
         const defaultDayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
         const addDefaultDayNames = () => {
           defaultDayNames.forEach(dayName => {
             menuRef.doc(defaultDayNames.indexOf(dayName).toString()).set({
@@ -56,6 +55,13 @@ export function startFirebaseComm(userId, userName) {
             });
           });
         };
+        // Don't think I need to do this 
+        // const settingsRef = db.collection("users").doc(userId).collection("settings");
+        // const addSettings = () => {
+        //   settingsRef.add({
+
+        //   });
+        // };
 
         db.collection("users").doc(userId).set({
           name: userName,
@@ -83,10 +89,12 @@ function setFirestoreListener(userId) {
       });
     });
 
-    // Listen for snack updates
+    // Listen for snacks and user settings
     db.collection("users").doc(userId).onSnapshot(userSnapshot => {
       let snacks = userSnapshot.data().snacks;
+      const autoAdd = userSnapshot.data().autoAdd;
       dispatch(receiveSnacks(snacks));
+      dispatch(receiveAutoAdd(autoAdd));
     });
 
     // Listen for shopping list updates
@@ -123,6 +131,13 @@ function receiveSnacks(snacksFromFirebase) {
   return {
     type: c.RECEIVE_SNACKS,
     snacks: snacksFromFirebase
+  };
+}
+
+function receiveAutoAdd(autoAddFromFirebase) {
+  return {
+    type: c.RECEIVE_AUTO_ADD,
+    autoAdd: autoAddFromFirebase
   };
 }
 
@@ -246,6 +261,21 @@ export function clearMenu() {
 
     db.collection("users").doc(userId).update({
       "snacks": "_________________________"
+    });
+  };
+}
+
+//---------------------- //
+// USER SETTINGS ACTIONS //
+//---------------------- //
+
+// autoAddCategories is a json with category IDs as keys
+export function updateAutoAdd(autoAddCategories) {
+  return function () {
+    const userId = firebase.auth().currentUser.uid;
+    const userRef = db.collection("users").doc(userId);
+    userRef.update({ 
+      autoAdd: autoAddCategories
     });
   };
 }

@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 import { connect } from "react-redux";
-import { addGroceryItem } from "./../actions";
+import { updateAutoAdd, addGroceryItem } from "./../actions";
 import PropTypes from "prop-types";
 
 function NewItemForm(props) {
@@ -23,14 +23,41 @@ function NewItemForm(props) {
     display: "block"
   };
 
-  const { dispatch } = props;
+  const { dispatch, settings } = props;
   let _name = null;
 
+  /*
+  {
+    1234: {
+      name: "Produce",
+      items: [
+        {
+          name: "broccoli",
+          checked: true
+        }
+      ]
+    } 
+  }
+  */
   function handleNewItemFormSubmit(event) {
-    if (_name.value) {
-      dispatch(addGroceryItem(_name.value, event.target.value));
+    if (!_name.value) return;
+    const categoryId = event.target.value;
+    if (props.autoAdd) {
+      const newAutoAddItem = {
+        name: _name.value,
+        checked: false,
+      };
+      const newAutoAddData = Object.assign({}, settings.autoAddCategories);
+      if (!newAutoAddData[categoryId]) {
+        newAutoAddData[categoryId] = { items: [] };
+      }
+      newAutoAddData[categoryId].items.push(newAutoAddItem);
+      dispatch(updateAutoAdd(newAutoAddData));
       _name.value = "";
+      return;
     }
+    dispatch(addGroceryItem(_name.value, categoryId));
+    _name.value = "";
   }
 
   return (
@@ -38,7 +65,7 @@ function NewItemForm(props) {
       <Form.Control
         style={inputStyle}
         type="text"
-        placeholder="New Item"
+        placeholder={props.autoAdd ? "New auto-add item" : "New item"}
         ref={(input) => { _name = input; }} />
       <div className="d-flex flex-column">
         <ButtonGroup style={buttonStyle}>
@@ -58,12 +85,15 @@ function NewItemForm(props) {
 
 NewItemForm.propTypes = {
   shoppingList: PropTypes.object,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
+  autoAdd: PropTypes.bool,
+  settings: PropTypes.object
 };
 
 const mapStateToProps = (state) => {
   return {
-    shoppingList: state.shoppingList
+    shoppingList: state.shoppingList,
+    settings: state.settings
   };
 };
 
