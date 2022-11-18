@@ -31,7 +31,7 @@
     "react-router-dom": "^5.1.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "styled-jsx": "^3.2.5",
+    "styled-jsx": "^5.1.0",
     "wanted": "^1.4.3"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "eslint-loader": "^3.0.4",
     "eslint-plugin-react": "^7.19.0",
     "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "jest": "^25.3.0",
     "react-hot-loader": "^4.12.20",
     "style-loader": "^0.20.3",
